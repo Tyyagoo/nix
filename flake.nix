@@ -1,11 +1,32 @@
 {
-  description = "A very basic flake";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
 
-  outputs = { self, nixpkgs }: {
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-
-    packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
-
+    cowsay.url = "github:snowfallorg/cowsay?ref=v1.3.0";
   };
+  outputs = inputs: let
+    lib = inputs.snowfall-lib.mkLib {
+      inherit inputs;
+      src = ./.;
+      snowfall = {
+        namespace = "nixty";
+        meta = {
+          name = "nixty";
+          title = "NixTy";
+        };
+      };
+    };
+  in 
+    lib.mkFlake {
+      channels-config = {
+        allowUnfree = true;
+      };
+      overlays = [];
+      systems.modules.nixos = [];
+    };
 }
