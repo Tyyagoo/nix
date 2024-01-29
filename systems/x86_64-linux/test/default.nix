@@ -19,7 +19,10 @@
     ...
 }:
 with lib;
+with lib.nixty;
 {
+  desktop.awesomewm = enabled;
+
   virtualisation.vmVariant = {
     virtualisation = {
       memorySize = 2048;
