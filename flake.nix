@@ -1,9 +1,19 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     snowfall-lib = {
       url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixpkgs-f2k = {
+      url = "github:fortuneteller2k/nixpkgs-f2k";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -24,7 +34,9 @@
   in 
     lib.mkFlake {
       channels-config.allowUnfree = true;
-      overlays = with inputs; [];
+      overlays = with inputs; [
+        nixpkgs-f2k.overlays.window-managers
+      ];
       systems.modules.nixos = with inputs; [];
       templates = import ./templates {};
     };

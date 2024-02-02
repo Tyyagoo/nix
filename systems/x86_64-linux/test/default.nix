@@ -31,14 +31,5 @@ with lib.nixty;
     };
   };
 
-  users.users = {
-    test = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" ];
-      password = "pwd";
-      group = "admin";
-    };
-  };
-
   system.stateVersion = "23.05";
 }
