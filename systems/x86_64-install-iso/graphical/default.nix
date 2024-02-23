@@ -23,7 +23,7 @@ with lib.nixty;
 
   environment.systemPackages = with pkgs; [
     firefox
-    nvim
+    neovim
     git
   ];
 
