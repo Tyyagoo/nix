@@ -21,7 +21,7 @@
 with lib;
 with lib.nixty;
 {
-  desktop.awesomewm = enabled;
+  # enable a graphical environment
 
   virtualisation.vmVariant = {
     virtualisation = {

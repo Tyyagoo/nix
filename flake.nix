@@ -12,12 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs-f2k = {
-      url = "github:fortuneteller2k/nixpkgs-f2k";
+    nixos-generators = { 
+      url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    cowsay.url = "github:snowfallorg/cowsay?ref=v1.3.0";
   };
   outputs = inputs: let
     lib = inputs.snowfall-lib.mkLib {
@@ -34,9 +32,7 @@
   in 
     lib.mkFlake {
       channels-config.allowUnfree = true;
-      overlays = with inputs; [
-        nixpkgs-f2k.overlays.window-managers
-      ];
+      overlays = with inputs; [];
       systems.modules.nixos = with inputs; [];
       templates = import ./templates {};
     };
