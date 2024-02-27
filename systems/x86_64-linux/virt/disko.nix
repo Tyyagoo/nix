@@ -17,35 +17,42 @@
                 mountpoint = "/boot";
               };
             };
-            root = {
+            luks = {
               size = "100%";
               content = {
-                type = "btrfs";
-                extraArgs = [ "-f" ];
-                subvolumes = {
-                  "/root" = {
-                    mountpoint = "/";
-                    mountOptions = [ "compress=zstd " "noatime" ];
-                  };
-                  "/home" = {
-                    mountpoint = "/home";
-                    mountOptions = [ "compress=zstd " "noatime" ];
-                  };
-                  "/nix" = {
-                    mountpoint = "/nix";
-                    mountOptions = [ "compress=zstd " "noatime" ];
-                  };
-                  "/persist" = {
-                    mountpoint = "/persist";
-                    mountOptions = [ "compress=zstd " "noatime" ];
-                  };
-                  "/var/log" = {
-                    mountpoint = "/var/log";
-                    mountOptions = [ "compress=zstd " "noatime" ];
-                  };
-                  "/swap" = {
-                    mountpoint = "/.swapvol";
-                    swap.swapfile.size = "20M"; # TODO: change when installing bare metal.
+                type = "luks";
+                name = "cryptmain";
+                settings.allowDiscards = true;
+                passwordFile = "/tmp/secret.key";
+                extraFormatArgs = [ "--iter-time 1" ]; # TODO: remove when installing bare metal
+                content = {
+                  type = "btrfs";
+                  extraArgs = [ "-f" ];
+                  subvolumes = {
+                    "/root" = {
+                      mountpoint = "/";
+                      mountOptions = [ "compress=zstd " "noatime" ];
+                    };
+                    "/home" = {
+                      mountpoint = "/home";
+                      mountOptions = [ "compress=zstd " "noatime" ];
+                    };
+                    "/nix" = {
+                      mountpoint = "/nix";
+                      mountOptions = [ "compress=zstd " "noatime" ];
+                    };
+                    "/persist" = {
+                      mountpoint = "/persist";
+                      mountOptions = [ "compress=zstd " "noatime" ];
+                    };
+                    "/var/log" = {
+                      mountpoint = "/var/log";
+                      mountOptions = [ "compress=zstd " "noatime" ];
+                    };
+                    "/swap" = {
+                      mountpoint = "/.swapvol";
+                      swap.swapfile.size = "20M"; # TODO: change when installing bare metal.
+                    };
                   };
                 };
               };
@@ -53,7 +60,7 @@
           };
         };
       };
-      stg = {
+      secondary = {
         device = hdd;
         type = "disk";
         content = {

@@ -18,6 +18,7 @@ with lib.nixty;
     systemd-boot.enable = false;
     grub = {
       enable = true;
+      enableCryptodisk = true;
       efiSupport = true;
       efiInstallAsRemovable = true;
       device = "nodev";
