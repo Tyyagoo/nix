@@ -16,6 +16,11 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs: let
     lib = inputs.snowfall-lib.mkLib {
@@ -33,7 +38,9 @@
     lib.mkFlake {
       channels-config.allowUnfree = true;
       overlays = with inputs; [];
-      systems.modules.nixos = with inputs; [];
+      systems.modules.nixos = with inputs; [
+        disko.nixosModules.disko
+      ];
       templates = import ./templates {};
     };
 }
