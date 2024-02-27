@@ -38,9 +38,7 @@
     lib.mkFlake {
       channels-config.allowUnfree = true;
       overlays = with inputs; [];
-      systems.modules.nixos = with inputs; [
-        disko.nixosModules.disko
-      ];
+      systems.modules.nixos = with inputs; [];
       templates = import ./templates {};
     };
 }
