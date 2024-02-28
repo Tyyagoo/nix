@@ -8,9 +8,9 @@
 with lib;
 with lib.nixty;
 let
-  cfg = config.hardware.audio;
+  cfg = config.system.audio;
 in {
-  options.hardware.audio = with types; {
+  options.system.audio = with types; {
     enable = mkBoolOpt false "Enable audio support.";
     lowLatency = mkBoolOpt false "Enable low-latency setup.";
   };

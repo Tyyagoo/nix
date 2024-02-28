@@ -8,9 +8,9 @@
 with lib;
 with lib.nixty;
 let
-  cfg = config.hardware.storage.btrfs;
+  cfg = config.system.storage.btrfs;
 in {
-  options.hardware.storage.btrfs = with types; {
+  options.system.storage.btrfs = with types; {
     enable = mkBoolOpt false "Enable btrfs support.";
   };
 
