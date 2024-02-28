@@ -1,17 +1,13 @@
-{
-    lib,
-    pkgs,
-    inputs,
-    config,
-    ...
-}:
+{ lib, pkgs, inputs, config, ... }:
 with lib;
-with lib.nixty;
-{
+with lib.nixty; {
   imports = [
     ./hardware.nix
     inputs.disko.nixosModules.disko
-    (import ./disko.nix { ssd = "/dev/sda"; hdd = "/dev/sdb"; })
+    (import ./disko.nix {
+      ssd = "/dev/sda";
+      hdd = "/dev/sdb";
+    })
     inputs.impermanence.nixosModules.impermanence
   ];
 

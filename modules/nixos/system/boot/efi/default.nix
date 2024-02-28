@@ -1,14 +1,7 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ options, config, lib, pkgs, ... }:
 with lib;
 with lib.nixty;
-let
-  cfg = config.system.boot.efi;
+let cfg = config.system.boot.efi;
 in {
   options.system.boot.efi = with types; {
     enable = mkBoolOpt false "Enable efi booting";

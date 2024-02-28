@@ -1,4 +1,4 @@
-{ ssd, hdd, ...}: {
+{ ssd, hdd, ... }: {
   disko.devices = {
     disk = {
       main = {
@@ -25,7 +25,8 @@
                 name = "cryptmain";
                 settings.allowDiscards = true;
                 passwordFile = "/tmp/secret.key";
-                extraFormatArgs = [ "--iter-time 1" ]; # TODO: remove when installing bare metal
+                extraFormatArgs =
+                  [ "--iter-time 1" ]; # TODO: remove when installing bare metal
                 content = {
                   type = "btrfs";
                   extraArgs = [ "-f" ];
@@ -54,7 +55,8 @@
                     };
                     "/swap" = {
                       mountpoint = "/.swapvol";
-                      swap.swapfile.size = "20M"; # TODO: change when installing bare metal.
+                      swap.swapfile.size =
+                        "20M"; # TODO: change when installing bare metal.
                     };
                   };
                 };
@@ -82,7 +84,8 @@
                 # https://discourse.nixos.org/t/decrypting-other-drives-after-the-root-device-has-been-decrypted-using-a-keyfile/21281
                 initrdUnlock = false;
                 additionalKeyFiles = [ "/tmp/secret.key" ];
-                extraFormatArgs = [ "--iter-time 1" ]; # TODO: remove when installing bare metal
+                extraFormatArgs =
+                  [ "--iter-time 1" ]; # TODO: remove when installing bare metal
                 content = {
                   type = "filesystem";
                   format = "ext4";
@@ -95,4 +98,4 @@
       };
     };
   };
-  }
+}

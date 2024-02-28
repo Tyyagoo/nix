@@ -1,22 +1,17 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ options, config, lib, pkgs, ... }:
 with lib;
 with lib.nixty;
-let
-  cfg = config.system.storage.btrfs;
+let cfg = config.system.storage.btrfs;
 in {
   options.system.storage.btrfs = with types; {
     enable = mkBoolOpt false "Enable btrfs support.";
-    wipeOnBoot = mkBoolOpt false "Enable to restore specific subvolumes to an empty state on boot.";
+    wipeOnBoot = mkBoolOpt false
+      "Enable to restore specific subvolumes to an empty state on boot.";
     keepFor = mkOpt int 30 "Keep btrfs_tmp files for n days.";
   };
 
-  options.environment.persist = mkOpt types.attrs {} "Files and directories to persist.";
+  options.environment.persist =
+    mkOpt types.attrs { } "Files and directories to persist.";
 
   config = mkIf cfg.enable {
     boot.supportedFilesystems = [ "btrfs" ];
@@ -39,7 +34,9 @@ in {
         btrfs subvolume delete "$1"
       }
 
-      for i in $(find /mnt/old_roots/ -maxdepth 1 -mtime +${builtins.toString cfg.keepFor}); do
+      for i in $(find /mnt/old_roots/ -maxdepth 1 -mtime +${
+        builtins.toString cfg.keepFor
+      }); do
         delete_subvolume_recursively "$i"
       done
 
@@ -47,6 +44,7 @@ in {
       umount /mnt
     '');
 
-    environment.persistence."/persist" = mkIf cfg.wipeOnBoot (mkAliasDefinitions options.environment.persist);
+    environment.persistence."/persist" =
+      mkIf cfg.wipeOnBoot (mkAliasDefinitions options.environment.persist);
   };
 }

@@ -1,7 +1,4 @@
-{
-  lib,
-  ...
-}:
+{ lib, ... }:
 with lib; rec {
   mkOpt = type: default: description:
     mkOption { inherit type default description; };
@@ -13,6 +10,6 @@ with lib; rec {
   mkBoolOpt' = mkOpt' types.bool;
 
   enabled = { enable = true; };
-  
+
   disabled = { enable = false; };
 }

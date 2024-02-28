@@ -1,14 +1,7 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ options, config, lib, pkgs, ... }:
 with lib;
 with lib.nixty;
-let
-  cfg = config.system.network;
+let cfg = config.system.network;
 in {
   options.system.network = with types; {
     enable = mkBoolOpt false "Enable Network Manager.";
@@ -16,8 +9,6 @@ in {
 
   config = mkIf cfg.enable {
     networking.networkmanager.enable = true;
-    environment.persist.directories = [
-      "/etc/NetworkManager"
-    ];
+    environment.persist.directories = [ "/etc/NetworkManager" ];
   };
 }

@@ -1,14 +1,7 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ options, config, lib, pkgs, ... }:
 with lib;
 with lib.nixty;
-let
-  cfg = config.system.audio;
+let cfg = config.system.audio;
 in {
   options.system.audio = with types; {
     enable = mkBoolOpt false "Enable audio support.";
@@ -25,10 +18,8 @@ in {
     };
 
     # TODO: optimize the quant value
-    environment.etc = 
-      let
-        json = pkgs.formats.json {};
-      in mkIf cfg.lowLatency {
+    environment.etc = let json = pkgs.formats.json { };
+    in mkIf cfg.lowLatency {
       "pipewire/pipewire.conf.d/92-low-latency.conf".text = ''
         context.properties = {
           default.clock.rate = 48000
@@ -39,9 +30,9 @@ in {
       '';
 
       # NOTE: As a general rule, the values in pipewire-pulse should not be lower than the ones in pipewire. 
-      "pipewire/pipewire-pulse.d/92-low-latency.conf".source = json.generate "92-low-latency.conf" {
-        context.modules = [
-          {
+      "pipewire/pipewire-pulse.d/92-low-latency.conf".source =
+        json.generate "92-low-latency.conf" {
+          context.modules = [{
             name = "libpipewire-module-protocol-pulse";
             args = {
               pulse.min.req = "32/48000";
@@ -50,13 +41,12 @@ in {
               pulse.min.quantum = "32/48000";
               pulse.max.quantum = "32/48000";
             };
-          }
-        ];
-        stream.properties = {
-          node.latency = "32/48000";
-          resample.quality = 1;
+          }];
+          stream.properties = {
+            node.latency = "32/48000";
+            resample.quality = 1;
+          };
         };
-      };
 
       "wireplumber/main.lua.d/99-alsa-lowlatency.lua".text = ''
         alsa_monitor.rules = {

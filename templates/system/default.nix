@@ -1,18 +1,6 @@
-{
-    lib,
-    pkgs,
-    inputs,
-    system,
-    target,
-    format,
-    virtual,
-    systems,
-    config,
-    ...
-}:
+{ lib, pkgs, inputs, system, target, format, virtual, systems, config, ... }:
 with lib;
-with lib.nixty;
-{
+with lib.nixty; {
   imports = [ ./hardware-configuration.nix ];
 
   # system.boot.efi.enable = true;
