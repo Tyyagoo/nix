@@ -66,17 +66,29 @@
         content = {
           type = "gpt";
           partitions = {
-            root = {
+            luks = {
               size = "100%";
               content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/storage";
-              };
+                type = "luks";
+                name = "cryptsec";
+                settings = {
+                  allowDiscards = true;
+                  keyFile = "/tmp/autogen.key";
+                };
+                # https://discourse.nixos.org/t/decrypting-other-drives-after-the-root-device-has-been-decrypted-using-a-keyfile/21281
+                initrdUnlock = false;
+                additionalKeyFiles = [ "/tmp/secret.key" ];
+                extraFormatArgs = [ "--iter-time 1" ]; # TODO: remove when installing bare metal
+                content = {
+                  type = "filesystem";
+                  format = "ext4";
+                  mountpoint = "/storage";
+                };
               };
             };
           };
         };
       };
     };
+  };
   }

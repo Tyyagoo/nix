@@ -25,5 +25,7 @@ with lib.nixty;
     };
   };
 
+  # environment.etc."crypttab".text = ''check after installation'';
+
   system.stateVersion = "23.11";
 }
