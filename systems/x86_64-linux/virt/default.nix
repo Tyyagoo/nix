@@ -25,7 +25,9 @@ with lib.nixty;
     };
   };
 
-  # environment.etc."crypttab".text = ''check after installation'';
+  environment.etc."crypttab".text = ''
+    cryptsec /dev/disk/by-partlabel/disk-secondary-luks /persist/secret.key
+  '';
 
   system.stateVersion = "23.11";
 }
