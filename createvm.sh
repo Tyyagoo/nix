@@ -1,6 +1,6 @@
 set -e
 
-nix build '.#nixosConfigurations.virt.config.system.build.diskoImagesScript'
+nix build '.#nixosConfigurations.virt.config.system.build.diskoImagesScript' --show-trace
 
 ./result \
   --pre-format-files /home/tyyago/nix/secret.key secret.key \

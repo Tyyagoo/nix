@@ -12,6 +12,7 @@ with lib.nixty;
     ./hardware.nix
     inputs.disko.nixosModules.disko
     (import ./disko.nix { ssd = "/dev/sda"; hdd = "/dev/sdb"; })
+    inputs.impermanence.nixosModules.impermanence
   ];
 
   boot.loader = {

@@ -46,6 +46,7 @@
                     "/persist" = {
                       mountpoint = "/persist";
                       mountOptions = [ "compress=zstd " "noatime" ];
+                      neededForBoot = true;
                     };
                     "/var/log" = {
                       mountpoint = "/var/log";

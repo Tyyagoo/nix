@@ -21,6 +21,8 @@
       url = "github:Tyyagoo/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    impermanence.url = "github:nix-community/impermanence";
   };
   outputs = inputs: let
     lib = inputs.snowfall-lib.mkLib {

@@ -16,6 +16,8 @@ in {
     keepFor = mkOpt int 30 "Keep btrfs_tmp files for n days.";
   };
 
+  options.environment.persist = mkOpt types.attrs {} "Files and directories to persist.";
+
   config = mkIf cfg.enable {
     boot.supportedFilesystems = [ "btrfs" ];
     environment.systemPackages = with pkgs; [ nixty.btrfsutils ];
@@ -44,5 +46,7 @@ in {
       btrfs subvolume snapshot /mnt/root-blank /mnt/root
       umount /mnt
     '');
+
+    environment.persistence."/persist" = mkIf cfg.wipeOnBoot (mkAliasDefinitions options.environment.persist);
   };
 }

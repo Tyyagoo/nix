@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1709129771,
-        "narHash": "sha256-YW6aJI/i9Lvpc3IGDYqMNbo+9yjJybsVh5TE3eJZxhg=",
+        "lastModified": 1709150261,
+        "narHash": "sha256-hOCk/+20ZgiVi7vDbHTl/NNXWB2ahaXeYNcwII/z768=",
         "owner": "Tyyagoo",
         "repo": "disko",
-        "rev": "9edda24ed091be8c111c28680849d964728050f2",
+        "rev": "a1f2dc1b455ece8a60fe47e6b3d9820ff31664b4",
         "type": "github"
       },
       "original": {
@@ -93,6 +93,21 @@
         "type": "github"
       }
     },
+    "impermanence": {
+      "locked": {
+        "lastModified": 1708968331,
+        "narHash": "sha256-VUXLaPusCBvwM3zhGbRIJVeYluh2uWuqtj4WirQ1L9Y=",
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "a33ef102a02ce77d3e39c25197664b7a636f9c30",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "type": "github"
+      }
+    },
     "nixlib": {
       "locked": {
         "lastModified": 1708821942,
@@ -149,6 +164,7 @@
       "inputs": {
         "disko": "disko",
         "home-manager": "home-manager",
+        "impermanence": "impermanence",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs",
         "snowfall-lib": "snowfall-lib"
