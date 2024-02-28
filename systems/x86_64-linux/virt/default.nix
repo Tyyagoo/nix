@@ -29,7 +29,10 @@ with lib.nixty;
     cryptsec /dev/disk/by-partlabel/disk-secondary-luks /persist/secret.key
   '';
 
-  system.storage.btrfs = enabled;
+  system.storage.btrfs = {
+    enable = true;
+    wipeOnBoot = true;
+  };
 
   system.stateVersion = "23.11";
 }
