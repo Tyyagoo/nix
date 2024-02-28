@@ -4,6 +4,7 @@
       main = {
         device = ssd;
         type = "disk";
+        imageSize = "4G";
         content = {
           type = "gpt";
           partitions = {
@@ -32,6 +33,7 @@
                     "/root" = {
                       mountpoint = "/";
                       mountOptions = [ "compress=zstd " "noatime" ];
+                      blankSnapshot = true;
                     };
                     "/home" = {
                       mountpoint = "/home";
@@ -63,6 +65,7 @@
       secondary = {
         device = hdd;
         type = "disk";
+        imageSize = "8G";
         content = {
           type = "gpt";
           partitions = {

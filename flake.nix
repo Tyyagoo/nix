@@ -18,7 +18,7 @@
     };
 
     disko = {
-      url = "github:nix-community/disko";
+      url = "github:Tyyagoo/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

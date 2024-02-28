@@ -9,7 +9,7 @@ with lib;
 with lib.nixty;
 {
   imports = [
-    ./hardware.nix 
+    ./hardware.nix
     inputs.disko.nixosModules.disko
     (import ./disko.nix { ssd = "/dev/sda"; hdd = "/dev/sdb"; })
   ];
