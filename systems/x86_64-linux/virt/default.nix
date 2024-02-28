@@ -15,17 +15,9 @@ with lib.nixty;
     inputs.impermanence.nixosModules.impermanence
   ];
 
-  boot.loader = {
-    systemd-boot.enable = false;
-    grub = {
-      enable = true;
-      enableCryptodisk = true;
-      efiSupport = true;
-      efiInstallAsRemovable = true;
-      device = "nodev";
-    };
-  };
+  system.boot.efi = enabled;
 
+  boot.loader.grub.enableCryptodisk = true;
   environment.etc."crypttab".text = ''
     cryptsec /dev/disk/by-partlabel/disk-secondary-luks /persist/secret.key
   '';
