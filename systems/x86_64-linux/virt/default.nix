@@ -23,5 +23,7 @@ with lib.nixty; {
     wipeOnBoot = true;
   };
 
+  security.gpg = enabled;
+
   system.stateVersion = "23.11";
 }

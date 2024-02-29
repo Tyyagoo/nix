@@ -24,6 +24,8 @@ let
 in {
   options.user = with types; {
     name = mkOpt str "tyyago" "The name to use for the user account.";
+    displayName = mkOpt str "Tyyago" "The name for display.";
+    email = mkOpt str "tyyago.dev@gmail.com" "The email of the user.";
     initialPassword = mkOpt str "pwd"
       "The initial password to use when the user is first created.";
     icon = mkOpt (nullOr package) defaultIcon
