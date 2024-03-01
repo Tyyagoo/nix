@@ -8,7 +8,6 @@ with lib.nixty; {
       ssd = "/dev/sda";
       hdd = "/dev/sdb";
     })
-    inputs.impermanence.nixosModules.impermanence
   ];
 
   system.boot.efi = enabled;
