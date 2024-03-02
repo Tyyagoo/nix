@@ -1,55 +1,90 @@
-{
+{ ssd, hdd, ... }: {
   disko.devices = {
     disk = {
       main = {
+        device = ssd;
         type = "disk";
-        device = "/dev/nvme0n1";
+        imageSize = "4G";
         content = {
           type = "gpt";
           partitions = {
             ESP = {
-              size = "512M";
+              start = "1M";
+              end = "512M";
               type = "EF00";
               content = {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "defaults" ];
               };
             };
             luks = {
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypted";
-                # disable settings.keyFile if you want to use interactive password entry
-                #passwordFile = "/tmp/secret.key"; # Interactive
-                settings = {
-                  allowDiscards = true;
-                  keyFile = "/tmp/secret.key";
-                };
-                additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
+                name = "cryptmain";
+                settings.allowDiscards = true;
+                passwordFile = "/tmp/secret.key";
                 content = {
                   type = "btrfs";
                   extraArgs = [ "-f" ];
                   subvolumes = {
                     "/root" = {
                       mountpoint = "/";
-                      mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions = [ "compress=zstd " "noatime" ];
+                      blankSnapshot = true;
                     };
                     "/home" = {
                       mountpoint = "/home";
-                      mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions = [ "compress=zstd " "noatime" ];
                     };
                     "/nix" = {
                       mountpoint = "/nix";
-                      mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions = [ "compress=zstd " "noatime" ];
+                    };
+                    "/persist" = {
+                      mountpoint = "/persist";
+                      mountOptions = [ "compress=zstd " "noatime" ];
+                      neededForBoot = true;
+                    };
+                    "/var/log" = {
+                      mountpoint = "/var/log";
+                      mountOptions = [ "compress=zstd " "noatime" ];
                     };
                     "/swap" = {
                       mountpoint = "/.swapvol";
-                      swap.swapfile.size = "20M";
+                      swap.swapfile.size = "8G";
                     };
                   };
+                };
+              };
+            };
+          };
+        };
+      };
+      secondary = {
+        device = hdd;
+        type = "disk";
+        imageSize = "8G";
+        content = {
+          type = "gpt";
+          partitions = {
+            luks = {
+              size = "100%";
+              content = {
+                type = "luks";
+                name = "cryptsec";
+                settings = {
+                  allowDiscards = true;
+                  keyFile = "/tmp/autogen.key";
+                };
+                # https://discourse.nixos.org/t/decrypting-other-drives-after-the-root-device-has-been-decrypted-using-a-keyfile/21281
+                initrdUnlock = false;
+                additionalKeyFiles = [ "/tmp/secret.key" ];
+                content = {
+                  type = "filesystem";
+                  format = "ext4";
+                  mountpoint = "/storage";
                 };
               };
             };

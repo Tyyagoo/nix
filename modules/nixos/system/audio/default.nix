@@ -10,6 +10,7 @@ in {
 
   config = mkIf cfg.enable {
     security.rtkit = enabled;
+    hardware.pulseaudio.enable = mkForce false;
     services.pipewire = {
       enable = true;
       alsa.enable = true;
