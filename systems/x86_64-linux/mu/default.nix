@@ -27,17 +27,17 @@ let baremetal = !virtual && format != "iso"; in
     };
   };
 
-  desktop.gnome = enabled;
+  desktop.hyprland = enabled;
   security.gpg = enabled;
   tools.git = enabled;
 
-  virtualisation.vmVariant = {
-    virtualisation = {
-      cores = 4;
-      memorySize = 4096;
-      qemu.options = [ "-vga std" "-accel kvm" ];
-    };
-  };
+  # virtualisation.vmVariant = {
+  #   virtualisation = {
+  #     cores = 4;
+  #     memorySize = 4096;
+  #     qemu.options = [ "-vga std" "-accel kvm" ];
+  #   };
+  # };
 
   system.stateVersion = "23.11";
 }
