@@ -1,8 +1,6 @@
 { options, config, lib, inputs, ... }:
 with lib;
 with lib.nixty; {
-  imports = with inputs; [ home-manager.nixosModules.home-manager ];
-
   options.home = with types; {
     file = mkOpt attrs { }
       "A set of files to be managed by home-manager's <option>home.file</option>.";

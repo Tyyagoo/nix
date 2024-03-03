@@ -23,6 +23,8 @@
     };
 
     impermanence.url = "github:nix-community/impermanence";
+
+    ags.url = "github:Aylur/ags";
   };
   outputs = inputs:
     let
@@ -40,8 +42,10 @@
     in lib.mkFlake {
       channels-config.allowUnfree = true;
       overlays = with inputs; [ ];
-      systems.modules.nixos = with inputs;
-        [ impermanence.nixosModules.impermanence ];
+      systems.modules.nixos = with inputs; [
+        home-manager.nixosModules.home-manager
+        impermanence.nixosModules.impermanence
+      ];
       templates = import ./templates { };
     };
 }

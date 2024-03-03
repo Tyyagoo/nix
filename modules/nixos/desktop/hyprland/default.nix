@@ -9,7 +9,13 @@ in {
 
   config = mkIf cfg.enable {
     programs.hyprland = enabled;
+
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+    # home.configFile = {
+    #   "hypr/hyprland.conf".source = ./config;
+    # };
+
     environment.systemPackages = [ pkgs.kitty ];
   };
 }
