@@ -1,4 +1,4 @@
-echo -n "pwd" > /tmp/secret.key
+# echo -n "pwd" > /tmp/secret.key
 dd bs=512 count=4 if=/dev/random of=/tmp/autogen.key iflag=fullblock
 nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko ./systems/x86_64-linux/virt/disko.nix --arg ssd '"/dev/sda"' --arg hdd '"/dev/sdb"'
 nixos-generate-config --no-filesystems --root /mnt

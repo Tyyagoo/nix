@@ -1,33 +1,34 @@
 { lib, pkgs, inputs, format, virtual, config, ... }:
 with lib;
 with lib.nixty;
-#let baremetal = !virtual && format != "iso"; in
+let baremetal = !virtual && format != "iso"; in
 {
   imports = [
     ./hardware.nix
-    #inputs.disko.nixosModules.disko
-    #(import ./disko.nix {
-    #  ssd = "/dev/nvme0n1";
-    #  hdd = "/dev/sda";
-    #})
+    inputs.disko.nixosModules.disko
+    (import ./disko.nix {
+      ssd = "/dev/nvme0n1";
+      hdd = "/dev/sda";
+    })
   ];
 
-  # disko.enableConfig = baremetal;
-  security.gpg = enabled;
+  disko.enableConfig = baremetal;
 
   system = {
-    #boot.efi = enabled;
+    boot.efi = enabled;
     audio = enabled;
     locale = enabled;
     network = enabled;
     nix = enabled;
     time = enabled;
-    #storage.btrfs = mkIf baremetal {
-    #  enable = true;
-    #  wipeOnBoot = true;
-    #};
+    storage.btrfs = mkIf baremetal {
+      enable = true;
+      wipeOnBoot = false;
+    };
   };
 
+  desktop.gnome = enabled;
+  security.gpg = enabled;
   tools.git = enabled;
 
   virtualisation.vmVariant = {
