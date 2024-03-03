@@ -40,9 +40,8 @@
     in lib.mkFlake {
       channels-config.allowUnfree = true;
       overlays = with inputs; [ ];
-      systems.modules.nixos = with inputs; [
-        impermanence.nixosModules.impermanence
-      ];
+      systems.modules.nixos = with inputs;
+        [ impermanence.nixosModules.impermanence ];
       templates = import ./templates { };
     };
 }

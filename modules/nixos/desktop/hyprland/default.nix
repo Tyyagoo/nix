@@ -3,7 +3,9 @@ with lib;
 with lib.nixty;
 let cfg = config.desktop.hyprland;
 in {
-  options.desktop.hyperland = with types; { enable = mkBoolOpt false "Enable hyprland compositor"; };
+  options.desktop.hyperland = with types; {
+    enable = mkBoolOpt false "Enable hyprland compositor";
+  };
 
   config = mkIf cfg.enable {
     programs.hyprland = enabled;

@@ -1,8 +1,8 @@
 { lib, pkgs, inputs, format, virtual, config, ... }:
 with lib;
 with lib.nixty;
-let baremetal = !virtual && format != "iso"; in
-{
+let baremetal = !virtual && format != "iso";
+in {
   imports = [
     ./hardware.nix
     inputs.disko.nixosModules.disko
