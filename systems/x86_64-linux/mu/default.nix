@@ -31,6 +31,18 @@ in {
   security.gpg = enabled;
   tools.git = enabled;
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
+  environment.systemPackages = [ pkgs.firefox ];
+
+  boot.loader.grub.enableCryptodisk = true;
+  environment.etc."crypttab".text = ''
+    cryptsec /dev/disk/by-partlabel/disk-secondary-luks /persist/secret.key
+  '';
+
   # virtualisation.vmVariant = {
   #   virtualisation = {
   #     cores = 4;

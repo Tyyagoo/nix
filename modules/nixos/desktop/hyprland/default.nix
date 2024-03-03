@@ -3,7 +3,7 @@ with lib;
 with lib.nixty;
 let cfg = config.desktop.hyprland;
 in {
-  options.desktop.hyperland = with types; {
+  options.desktop.hyprland = with types; {
     enable = mkBoolOpt false "Enable hyprland compositor";
   };
 
