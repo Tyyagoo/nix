@@ -23,8 +23,6 @@
     };
 
     impermanence.url = "github:nix-community/impermanence";
-
-    ags.url = "github:Aylur/ags";
   };
   outputs = inputs:
     let
