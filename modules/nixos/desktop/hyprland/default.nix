@@ -10,11 +10,16 @@ in {
   config = mkIf cfg.enable {
     programs.hyprland = enabled;
 
+    desktop.addons = { waybar = enabled; };
+
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-    # home.configFile = {
-    #   "hypr/hyprland.conf".source = ./config;
-    # };
+    home.configFile = {
+      "hypr/hyprland.conf" = {
+        text = import ./config.nix { };
+        onChange = "hyprctl reload";
+      };
+    };
 
     environment.systemPackages = [ pkgs.kitty ];
   };
