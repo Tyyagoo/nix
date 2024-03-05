@@ -17,6 +17,7 @@ in {
   system = {
     boot.efi = enabled;
     audio = enabled;
+    fonts = enabled;
     locale = enabled;
     network = enabled;
     nix = enabled;

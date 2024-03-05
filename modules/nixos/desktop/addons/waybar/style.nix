@@ -1,53 +1,36 @@
-{ }: ''
+{ ... }: ''
   * {
-    border: none;
-    border-radius: 10px;
+    font-family: 'Iosevka Nerd Font';
     font-size: 15px;
-    min-height: 10px;
+    color: #151515;
   }
 
   window#waybar {
     background: transparent;
+    margin: 10px 10px 0px 10px;
   }
 
   window#waybar.hidden {
     opacity: 0.2;
   }
 
-  #window {
-    margin-top: 6px;
-    padding-left: 10px;
-    padding-right: 10px;
-    transition: none;
-    color: transparent;
-    background: transparent;
-  }
-
-  #tags {
-    margin-top: 6px;
-    margin-left: 12px;
-    font-size: 4px;
-    margin-bottom: 0px;
-    background: #161320;
-    transition: none;
-  }
-
-  #tags button {
-    color: #B5E8E0;
-    background: transparent;
-    font-size: 16px;
-    border-radius: 2px;
-    transition: none;
+  #workspaces {
+    margin-left: 15px;
   }
 
   #clock {
-    margin-top: 6px;
-    margin-left: 8px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 0px;
-    transition: none;
-    color: #161320;
-    background: #ABE9B3;
+    margin-right: 15px;
+    padding: 0px 12px 0px 12px;
+  }
+
+  #workspaces,
+  #clock {
+    margin-top: 10px;
+    margin-bottom: 3px;
+    padding: 0px 6px 0px 6px;
+    background: #F5EEE6;
+    border: 1px solid #161616;
+    border-radius: 12px;
+    box-shadow: 0 0 2px black;
   }
 ''

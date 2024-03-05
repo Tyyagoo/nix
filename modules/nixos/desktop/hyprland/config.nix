@@ -1,7 +1,7 @@
 { }: ''
   monitor=,preferred,auto,auto
 
-  exec-once = waybar
+  exec-once = waybar & swww init
 
   $terminal = kitty
   $fileManager = dolphin

@@ -20,7 +20,7 @@ in {
     home.programs.waybar = {
       enable = true;
       settings = import ./config.nix { };
-      style = import ./style.nix { };
+      # style = import ./style.nix { };
     };
 
     environment.systemPackages = [ waybar-restart ];

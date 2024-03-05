@@ -21,6 +21,6 @@ in {
       };
     };
 
-    environment.systemPackages = [ pkgs.kitty ];
+    environment.systemPackages = with pkgs; [ kitty swww ];
   };
 }
