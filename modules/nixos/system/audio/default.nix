@@ -15,8 +15,11 @@ in {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
-      pulse = enabled;
+      pulse.enable = true;
+      wireplumber.enable = true;
     };
+
+    environment.systemPackages = with pkgs; [ yt-dlp pavucontrol ];
 
     # TODO: optimize the quant value
     environment.etc = let json = pkgs.formats.json { };

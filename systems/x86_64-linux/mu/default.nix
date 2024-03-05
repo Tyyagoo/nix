@@ -14,6 +14,14 @@ in {
 
   disko.enableConfig = baremetal;
 
+  apps = { ncmpcpp = enabled; };
+
+  desktop.hyprland = enabled;
+
+  security = { gpg = enabled; };
+
+  services = { mpd' = enabled; };
+
   system = {
     boot.efi = enabled;
     audio = enabled;
@@ -28,9 +36,7 @@ in {
     };
   };
 
-  desktop.hyprland = enabled;
-  security.gpg = enabled;
-  tools.git = enabled;
+  tools = { git = enabled; };
 
   programs.neovim = {
     enable = true;
