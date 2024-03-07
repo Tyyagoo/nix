@@ -9,8 +9,13 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # sound.enable = true;
+    # hardware.pulseaudio = {
+    #   enable = true;
+    #   support32Bit = true;
+    # };
+
     security.rtkit = enabled;
-    hardware.pulseaudio.enable = mkForce false;
     services.pipewire = {
       enable = true;
       alsa.enable = true;
@@ -19,7 +24,7 @@ in {
       wireplumber.enable = true;
     };
 
-    environment.systemPackages = with pkgs; [ yt-dlp pavucontrol ];
+    environment.systemPackages = with pkgs; [ yt-dlp pavucontrol pulsemixer ];
 
     # TODO: optimize the quant value
     environment.etc = let json = pkgs.formats.json { };

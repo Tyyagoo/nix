@@ -21,14 +21,13 @@ in {
       ];
       settings = {
         mpd_host = "127.0.0.1";
-	mpd_port = "6600";
-        mpd_music_dir = config.services.mpd.musicDirectory;
-	lyrics_directory = "/storage/ncmpcpp/lyrics";
-	visualizer_data_source = "/tmp/mpd.fifo";
-	visualizer_output_name = "mpfifo";
-	visualizer_in_stereo = "yes";
-	visualizer_type = "spectrum";
-	visualizer_look = "+|";
+        mpd_port = "6600";
+        lyrics_directory = "/storage/ncmpcpp/lyrics";
+        visualizer_data_source = "/tmp/mpd.fifo";
+        visualizer_output_name = "mpfifo";
+        visualizer_in_stereo = "yes";
+        visualizer_type = "spectrum";
+        visualizer_look = "+|";
       };
     };
   };
