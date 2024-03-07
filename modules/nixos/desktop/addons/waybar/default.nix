@@ -19,10 +19,10 @@ in {
   config = mkIf cfg.enable {
     home.programs.waybar = {
       enable = true;
-      settings = import ./config.nix { };
-      # style = import ./style.nix { };
+      settings = import ./config.nix { inherit pkgs; };
+      style = import ./style.nix { };
     };
 
-    environment.systemPackages = [ waybar-restart ];
+    environment.systemPackages = [ waybar-restart pkgs.cava ];
   };
 }
