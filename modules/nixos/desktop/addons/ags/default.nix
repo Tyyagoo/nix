@@ -19,6 +19,14 @@ in {
   config = mkIf cfg.enable {
     home.file.".local/${path}".source = "${pkg}/${path}"; # type definitions
     home.configFile."ags".source = ./config;
-    environment.systemPackages = [ pkg ];
+    environment.systemPackages = with pkgs; with nodePackages_latest; [
+      pkg
+      bun
+      gjs
+      typescript
+      typescript-language-server
+      eslint
+      nodejs
+    ];
   };
 }

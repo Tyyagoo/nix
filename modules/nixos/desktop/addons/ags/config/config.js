@@ -1,18 +1,14 @@
-const date = Variable('', {
-  poll: [1000, 'date'],
-})
+const entry = `${App.configDir}/main.ts`
+const outdir = "/tmp/ags/js"
 
-function Bar(monitor = 0) {
-  return Widget.Window({
-    monitor,
-    name: `bar${monitor}`,
-    anchor: ['top', 'left', 'right'],
-    child: Widget.Label({ label: date.bind() }),
-  })
+try {
+  await Utils.execAsync([
+    "bun", "build", entry,
+    "--outdir", outdir,
+    "--external", "resource://*",
+    "--external", "gi://*",
+  ])
+  await import(`file://${outdir}/main.js`)
+} catch (error) {
+  console.error(error)
 }
-
-App.config({
-  windows: [
-    Bar()
-  ]
-})
