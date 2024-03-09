@@ -8,7 +8,7 @@ const fullWeekDay = {
   "qua": "Quarta",
   "qui": "Quinta",
   "sex": "Sexta",
-  "sab": "Sábado",
+  "sáb": "Sábado",
   "dom": "Domingo",
 }
 

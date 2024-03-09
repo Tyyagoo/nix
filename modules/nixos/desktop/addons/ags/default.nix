@@ -18,7 +18,7 @@ in {
 
   config = mkIf cfg.enable {
     home.file.".local/${path}".source = "${pkg}/${path}"; # type definitions
-    home.configFile."ags".source = ./config;
+    # home.configFile."ags".source = ./config;
     environment.systemPackages = with pkgs; with nodePackages_latest; [
       pkg
       bun
