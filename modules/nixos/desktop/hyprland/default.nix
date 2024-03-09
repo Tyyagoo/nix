@@ -10,7 +10,10 @@ in {
   config = mkIf cfg.enable {
     programs.hyprland = enabled;
 
-    desktop.addons = { ags = enabled; };
+    desktop.addons = { 
+      ags = enabled;
+      waybar = enabled;
+    };
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 

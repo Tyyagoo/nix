@@ -14,7 +14,7 @@
       kb_layout = br 
       kb_variant =
       kb_model = abnt2
-      kb_options =
+      kb_options = caps:swapescape
       kb_rules =
 
       follow_mouse = 1
@@ -113,20 +113,18 @@
   $mainMod = SUPER
 
   # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-  bind = $mainMod, Q, exec, $terminal
-  bind = $mainMod, C, killactive, 
-  bind = $mainMod, M, exit, 
-  bind = $mainMod, E, exec, $fileManager
-  bind = $mainMod, V, togglefloating, 
-  bind = $mainMod, R, exec, $menu
-  bind = $mainMod, P, pseudo, # dwindle
-  bind = $mainMod, J, togglesplit, # dwindle
+  bind = $mainMod, RETURN, exec, $terminal
+  bind = $mainMod, Q, killactive, 
+  bind = $mainMod, Caps_Lock, exit, 
+  bind = $mainMod, R, exec, hyprctl reload; ags -q; ags 
+  # bind = $mainMod, P, pseudo, # dwindle
+  # bind = $mainMod, J, togglesplit, # dwindle
 
   # Move focus with mainMod + arrow keys
-  bind = $mainMod, left, movefocus, l
-  bind = $mainMod, right, movefocus, r
-  bind = $mainMod, up, movefocus, u
-  bind = $mainMod, down, movefocus, d
+  bind = $mainMod, H, movefocus, l
+  bind = $mainMod, L, movefocus, r
+  bind = $mainMod, K, movefocus, u
+  bind = $mainMod, J, movefocus, d
 
   # Switch workspaces with mainMod + [0-9]
   bind = $mainMod, 1, workspace, 1
@@ -151,6 +149,10 @@
   bind = $mainMod SHIFT, 8, movetoworkspace, 8
   bind = $mainMod SHIFT, 9, movetoworkspace, 9
   bind = $mainMod SHIFT, 0, movetoworkspace, 10
+
+  # Tabbed group
+  bind = $mainMod, SPACE, changegroupactive
+  bind = $mainMod SHIFT, SPACE, togglegroup
 
   # Example special workspace (scratchpad)
   bind = $mainMod, S, togglespecialworkspace, magic
