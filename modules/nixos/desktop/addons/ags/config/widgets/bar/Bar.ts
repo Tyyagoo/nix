@@ -4,7 +4,9 @@ import Launcher from "./widgets/Launcher"
 import Workspaces from "./widgets/Workspaces"
 
 const pos = options.bar.position.bind()
+const gap = options.bar.gaps.bind()
 const { start, center, end } = options.bar.layout
+const fix = "min-width: 2px; min-height: 2px;"
 
 export type BarWidget = keyof typeof widgets
 
@@ -24,9 +26,10 @@ export default function Bar(monitor = 0) {
     exclusivity: "exclusive",
     anchor: pos.as(p => [p, "right", "left"]), 
     child: Widget.CenterBox({
-      css: "min-width: 2px; min-height: 2px;",
+      css: fix, // margin: 10px ${g}px 0px ${g}px;`),
       startWidget: Widget.Box({
         hexpand: true,
+        css: gap.as(g => `margin-left: ${g}px;`),
         children: start.bind().as(xs => xs.map(w => widgets[w]())),
       }),
       centerWidget: Widget.Box({
@@ -35,6 +38,7 @@ export default function Bar(monitor = 0) {
       }),
       endWidget: Widget.Box({
         hexpand: true,
+        css: gap.as(g => `margin-right: ${g}px;`),
         children: end.bind().as(xs => xs.map(w => widgets[w]())),
       }),
     }) 

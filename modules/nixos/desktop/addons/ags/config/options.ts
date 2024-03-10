@@ -4,6 +4,7 @@ import { mkOpt } from "lib/options";
 const options = {
   bar: {
     position: mkOpt<"top" | "bottom">("top"),
+    gaps: mkOpt(20),
     layout: {
       start: mkOpt<BarWidget[]>([
         "launcher",
@@ -19,10 +20,10 @@ const options = {
     launcher: {
       action: mkOpt(() => App.toggleWindow("applications")),
       colored: mkOpt(true),
-      icon: mkOpt("󱄅"),
+      icon: mkOpt(" 󱄅 "),
     },
     workspaces: {
-      persistent: mkOpt(7),
+      persistent: mkOpt(10),
     },
     datetime: {
       format: mkOpt("  %T   %A %d %b"),
