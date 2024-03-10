@@ -1,6 +1,7 @@
 import options from "options"
 import Datetime from "./widgets/Datetime"
 import Launcher from "./widgets/Launcher"
+import Sidepanel from "./widgets/Sidepanel"
 import Workspaces from "./widgets/Workspaces"
 
 const pos = options.bar.position.bind()
@@ -13,6 +14,7 @@ export type BarWidget = keyof typeof widgets
 const widgets = {
   datetime: Datetime,
   launcher: Launcher,
+  sidepanel: Sidepanel,
   workspaces: Workspaces,
   expander: () => Widget.Box({ hexpand: true }), 
 } 

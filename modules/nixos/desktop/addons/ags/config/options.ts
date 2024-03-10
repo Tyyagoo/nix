@@ -15,6 +15,7 @@ const options = {
       end: mkOpt<BarWidget[]>([
         "expander",
         "datetime",
+        "sidepanel",
       ]),
     },
     launcher: {
@@ -29,6 +30,10 @@ const options = {
       format: mkOpt("  %T   %A %d %b"),
       action: mkOpt(() => App.toggleWindow("calendar")),
     },
+    sidepanel: {
+      icon: mkOpt(">>>"),
+      action: mkOpt(() => App.toggleWindow("sidepanel")),
+    }
   },
 };
 

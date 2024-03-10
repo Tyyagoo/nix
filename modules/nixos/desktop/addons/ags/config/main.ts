@@ -1,4 +1,5 @@
 import Bar from "widgets/bar/Bar"
+import Sidepanel from "widgets/sidepanel/Sidepanel"
 
 Utils.monitorFile("./style.css", () => {
   App.resetCss()
@@ -7,5 +8,5 @@ Utils.monitorFile("./style.css", () => {
 
 App.config({
   style: "./style.css",
-  windows: [Bar()]
+  windows: [Bar(), Sidepanel()],
 })

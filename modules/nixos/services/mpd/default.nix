@@ -34,6 +34,8 @@ in {
       extraArgs = [ "--verbose" ];
     };
 
+    home.services.mpd-mpris = enabled;
+
     environment.systemPackages = [ pkgs.mpc-cli ];
   };
 }
