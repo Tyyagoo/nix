@@ -1,4 +1,4 @@
-import Bar from "widgets/bar/index";
+import Bar from "widgets/bar/Bar"
 
 Utils.monitorFile("./style.css", () => {
   App.resetCss()
