@@ -27,6 +27,8 @@ in {
       typescript-language-server
       eslint
       nodejs
+      dart-sass
+      fd
     ];
   };
 }

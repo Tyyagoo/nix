@@ -1,41 +1,102 @@
 import { type BarWidget } from "widgets/bar/Bar";
-import { mkOpt } from "lib/options";
+import { mkOptions, opt } from "lib/options";
+import { icon } from "lib/utils";
+import { distro } from "lib/variables";
 
-const options = {
+const options = mkOptions(OPTIONS, {
+  autotheme: opt(false),
+  wallpaper: opt(`/home/${USER}/.config/background`, { persistent: true }),
+  theme: {
+    dark: {
+      primary: {
+        bg: opt("#51a4e7"),
+        fg: opt("#141414"),
+      },
+      error: {
+        bg: opt("#e55f86"),
+        fg: opt("#141414"),
+      },
+      bg: opt("#171717"),
+      fg: opt("#eeeeee"),
+      widget: opt("#eeeeee"),
+      border: opt("#eeeeee"),
+    },
+    light: {
+      primary: {
+        bg: opt("#426ede"),
+        fg: opt("#eeeeee"),
+      },
+      error: {
+        bg: opt("#b13558"),
+        fg: opt("#eeeeee"),
+      },
+      bg: opt("#fffffa"),
+      fg: opt("#080808"),
+      widget: opt("#080808"),
+      border: opt("#080808"),
+    },
+  
+    blur: opt(0),
+    scheme: opt<"dark" | "light">("dark"),
+    widget: { opacity: opt(94) },
+    border: {
+      width: opt(1),
+      opacity: opt(96),
+    },
+  
+    shadows: opt(true),
+    padding: opt(7),
+    spacing: opt(12),
+    radius: opt(11),
+  },
+
+  transition: opt(200),
+
+  font: {
+    size: opt(13),
+    name: opt("Iosevka Nerd Font"),
+  },
+
+  hyprland: {
+    gaps: opt(2.4),
+    inactiveBorder: opt("333333ff"),
+    gapsWhenOnly: opt(false),
+  },
+
   bar: {
-    position: mkOpt<"top" | "bottom">("top"),
-    gaps: mkOpt(20),
+    position: opt<"top" | "bottom">("top"),
+    gaps: opt(20),
     layout: {
-      start: mkOpt<BarWidget[]>([
+      start: opt<BarWidget[]>([
         "launcher",
       ]),
-      center: mkOpt<BarWidget[]>([
+      center: opt<BarWidget[]>([
         "workspaces",
       ]),
-      end: mkOpt<BarWidget[]>([
+      end: opt<BarWidget[]>([
         "expander",
         "datetime",
         "sidepanel",
       ]),
     },
     launcher: {
-      action: mkOpt(() => App.toggleWindow("applications")),
-      colored: mkOpt(true),
-      icon: mkOpt(" 󱄅 "),
+      action: opt(() => App.toggleWindow("applications")),
+      colored: opt(true),
+      icon: opt(icon(distro)),
     },
     workspaces: {
-      persistent: mkOpt(10),
+      persistent: opt(10),
     },
     datetime: {
-      format: mkOpt("  %T   %A %d %b"),
-      action: mkOpt(() => App.toggleWindow("calendar")),
+      format: opt("  %T   %A %d %b"),
+      action: opt(() => App.toggleWindow("calendar")),
     },
     sidepanel: {
-      icon: mkOpt(">>>"),
-      action: mkOpt(() => App.toggleWindow("sidepanel")),
+      icon: opt(">>>"),
+      action: opt(() => App.toggleWindow("sidepanel")),
     }
   },
-};
+});
 
 globalThis["options"] = options;
 export default options;

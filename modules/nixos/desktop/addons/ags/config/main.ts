@@ -1,12 +1,13 @@
+import "lib/session"
+import "lib/init"
+import options from "options"
 import Bar from "widgets/bar/Bar"
 import Sidepanel from "widgets/sidepanel/Sidepanel"
-
-Utils.monitorFile("./style.css", () => {
-  App.resetCss()
-  App.applyCss("./style.css")
-})
+import { init } from "lib/init"
 
 App.config({
-  style: "./style.css",
+  onConfigParsed: () => {
+    init()
+  },
   windows: [Bar(), Sidepanel()],
 })
