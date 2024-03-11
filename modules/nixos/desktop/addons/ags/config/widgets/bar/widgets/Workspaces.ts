@@ -17,8 +17,13 @@ const Workspaces = (n: number) => Widget.Box({
     setup: self => self.hook(hyprland, () => {
       self.toggleClassName("active", hyprland.active.workspace.id === i)
       self.toggleClassName("occupied", (hyprland.getWorkspace(i)?.windows || 0) > 0)
-    })
-  }))
+    }),
+  })),
+  setup: self => {
+    self.hook(hyprland.active.workspace, () => self.children.map(l => {
+      l.visible = hyprland.workspaces.some(ws => ws.id === l.attribute)
+    }))
+  }
 })
 
 export default () => PanelButton({
