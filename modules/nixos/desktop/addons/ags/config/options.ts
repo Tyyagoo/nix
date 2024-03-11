@@ -94,6 +94,27 @@ const options = mkOptions(OPTIONS, {
     sidepanel: {
       icon: opt(">>>"),
       action: opt(() => App.toggleWindow("sidepanel")),
+    },
+  },
+
+  powermenu: {
+    logout: opt("pkill Hyprland"),
+    reboot: opt("systemctl reboot"),
+    shutdown: opt("shutdown now"),
+    layout: opt<"line" | "box">("line"),
+    labels: opt(true),
+  },
+
+  sidepanel: {
+    avatar: {
+      image: opt(`/home/${Utils.USER}/.face`),
+      size: opt(70),
+    },
+    width: opt(300),
+    position: opt<"left" | "center" | "right">("right"),
+    media: {
+      monochromeIcon: opt(true),
+      coverSize: opt(100),
     }
   },
 });
