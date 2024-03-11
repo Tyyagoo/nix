@@ -8,6 +8,7 @@ import { DND } from "./widgets/DND";
 
 const { bar, sidepanel } = options
 const layout = Utils.derive([bar.position, sidepanel.position], (bar, sp) => `${bar}-${sp}` as const)
+const media = await Service.import("mpris")
 
 export function setupSidepanel() {
   App.addWindow(Sidepanel())
@@ -49,6 +50,7 @@ const Panel = () => Widget.Box({
     Row(),
     Row([MicMute], [DND]),
     Widget.Box({
+      visible: media.bind("players").as(ps => ps.length > 0),
       child: Media(),
     })
   ]

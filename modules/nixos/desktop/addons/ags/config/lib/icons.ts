@@ -53,6 +53,12 @@ export default {
     },
     mixer: "sliders",
   },
+  media: {
+    playing: "pause-circle",
+    stopped: "play-circle",
+    next: "fast-forward",
+    prev: "rewind",
+  },
   powermenu: {
     logout: "log-out",
     reboot: "refresh-cw",

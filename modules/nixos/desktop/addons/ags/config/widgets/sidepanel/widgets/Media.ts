@@ -1,13 +1,11 @@
 import { MprisPlayer } from "types/service/mpris"
+import options from "options"
+import icons from "lib/icons"
+import { icon } from "lib/utils"
 
 const mpris = await Service.import("mpris")
 const players = mpris.bind("players")
-
-const FALLBACK_ICON = "audio-x-generic-symbolic"
-const PLAY_ICON = "media-playback-start-symbolic"
-const PAUSE_ICON = "media-playback-pause-symbolic"
-const PREV_ICON = "media-skip-backward-symbolic"
-const NEXT_ICON = "media-skip-forward-symbolic"
+const { media } = options.sidepanel
 
 function lengthStr(length: number) {
     if (length < 1) return "0:00"
@@ -19,21 +17,31 @@ function lengthStr(length: number) {
 
 function Player(player: MprisPlayer) {
   const img = Widget.Box({
-    class_name: "img",
+    class_name: "cover",
     vpack: "start",
-    css: player.bind("cover_path").as(p => `background-image: url('${p}');`),
+    css: Utils.merge([
+      player.bind("cover_path"),
+      player.bind("track_cover_url"),
+      media.coverSize.bind(),
+    ], (path, url, size) => `
+        min-width: ${size}px;
+        min-height: ${size}px;
+        background-image: url('${path || url}');
+    `),
   })
 
   const title = Widget.Label({
     class_name: "title",
-    wrap: true,
+    max_width_chars: 20,
+    truncate: "end",
     hpack: "start",
     label: player.bind("track_title"),
   })
 
   const artist = Widget.Label({
     class_name: "artist",
-    wrap: true,
+    max_width_chars: 20,
+    truncate: "end",
     hpack: "start",
     label: player.bind("track_artists").as(xs => xs.join(", ")),
   }) 
@@ -75,27 +83,23 @@ function Player(player: MprisPlayer) {
     label: player.bind("length").as(lengthStr),
   })
 
-  const icon = Widget.Icon({
+  const playerIcon = Widget.Icon({
     class_name: "icon",
     hexpand: true,
     hpack: "end",
     vpack: "start",
     tooltip_text: player.identity || "",
-    icon: player.bind("entry").as(e => {
-      const name = `${e}-symbolic`
-      return Utils.lookUpIcon(name) ? name : FALLBACK_ICON
-    })
+    icon: Utils.merge([player.bind("entry"), media.monochromeIcon.bind()], (e, c) => icon(`${e}${c ? "-symbolic" : ""}`)),
   })
 
   const toggle = Widget.Button({
-    class_name: "toggle",
+    class_name: "play-pause",
     on_clicked: () => player.playPause(),
     visible: player.bind("can_play"),
     child: Widget.Icon({
       icon: player.bind("play_back_status").as(s => {
-        if (s === "Playing") return PAUSE_ICON
-        if (s === "Paused") return PLAY_ICON
-        return ""
+        if (s === "Playing") return icons.media.playing
+        return icons.media.stopped
       })
     })
   })
@@ -104,18 +108,19 @@ function Player(player: MprisPlayer) {
     class_name: "prev",
     on_clicked: () => player.previous(),
     visible: player.bind("can_go_prev"),
-    child: Widget.Icon(PREV_ICON),
+    child: Widget.Icon(icons.media.prev),
   })
 
   const next = Widget.Button({
     class_name: "next",
     on_clicked: () => player.next(),
     visible: player.bind("can_go_next"),
-    child: Widget.Icon(NEXT_ICON),
+    child: Widget.Icon(icons.media.next),
   })
 
   return Widget.Box({
     class_name: "player",
+    vexpand: false,
     children: [
       img,
       Widget.Box({
@@ -123,12 +128,13 @@ function Player(player: MprisPlayer) {
         hexpand: true,
         children: [
           Widget.Box({
-            children: [title, icon],
+            children: [title, playerIcon],
           }),
           artist,
           Widget.Box({ vexpand:true }),
           positionSlider,
           Widget.CenterBox({
+            class_name: "footer horizontal",
             start_widget: positionLabel,
             center_widget: Widget.Box([prev, toggle, next]),
             end_widget: lengthLabel,
@@ -141,7 +147,6 @@ function Player(player: MprisPlayer) {
 
 export default () => Widget.Box({
   vertical: true,
-  css: "min-height: 2px; min-width: 2px;",
-  visible: players.as(p => p.length > 0),
-  children: players.as(p => p.filter(x => x.name === "mpd").map(Player)),
+  class_name: "media vertical",
+  children: players.as(p => p.map(Player)),
 })
