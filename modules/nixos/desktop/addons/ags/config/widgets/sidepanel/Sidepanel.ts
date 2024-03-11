@@ -5,6 +5,7 @@ import Header from "./widgets/Header";
 import Media from "./widgets/Media";
 import { AppMixer, MicMute, Microphone, SinkSelector, Volume } from "./widgets/Volume";
 import { DND } from "./widgets/DND";
+import { DarkModeToggle } from "./widgets/DarkMode";
 
 const { bar, sidepanel } = options
 const layout = Utils.derive([bar.position, sidepanel.position], (bar, sp) => `${bar}-${sp}` as const)
@@ -47,7 +48,7 @@ const Panel = () => Widget.Box({
       ],
     }),
     Row(),
-    Row(),
+    Row([DarkModeToggle], []),
     Row([MicMute], [DND]),
     Widget.Box({
       visible: media.bind("players").as(ps => ps.length > 0),
