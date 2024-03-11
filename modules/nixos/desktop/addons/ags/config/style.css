@@ -15,6 +15,7 @@
 }
 
 .workspaces * {
+  font-family: 'Noto Sans Mono CJK JP';
   margin: 0 4px;
   padding: 0px 8px;
   border-radius: 6px;
