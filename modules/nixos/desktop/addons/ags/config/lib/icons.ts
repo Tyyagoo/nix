@@ -69,6 +69,11 @@ export default {
     silent: "bell-off",
     message: "message-circle",
   },
+  network: {
+    connected: "wifi",
+    connecting: "loader",
+    disconnected: "wifi-off",
+  },
   color: {
     dark: "moon",
     light: "sun",

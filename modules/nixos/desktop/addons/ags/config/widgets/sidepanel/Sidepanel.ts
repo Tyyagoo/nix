@@ -6,6 +6,7 @@ import Media from "./widgets/Media";
 import { AppMixer, MicMute, Microphone, SinkSelector, Volume } from "./widgets/Volume";
 import { DND } from "./widgets/DND";
 import { DarkModeToggle } from "./widgets/DarkMode";
+import { WiredIndicator } from "./widgets/Network";
 
 const { bar, sidepanel } = options
 const layout = Utils.derive([bar.position, sidepanel.position], (bar, sp) => `${bar}-${sp}` as const)
@@ -47,7 +48,7 @@ const Panel = () => Widget.Box({
         // Brightness
       ],
     }),
-    Row(),
+    Row([WiredIndicator]),
     Row([DarkModeToggle], []),
     Row([MicMute], [DND]),
     Widget.Box({
