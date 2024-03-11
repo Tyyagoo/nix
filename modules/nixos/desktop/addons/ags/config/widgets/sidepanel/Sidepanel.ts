@@ -8,6 +8,6 @@ export default () => Widget.Window({
   layer: "top",
   anchor: ["top", "right"],
   child: Widget.Box({
-    children: [ Media() ],
+    children: [ Widget.Label("menu"), Media() ],
   }) 
 })

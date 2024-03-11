@@ -10,6 +10,7 @@ const PREV_ICON = "media-skip-backward-symbolic"
 const NEXT_ICON = "media-skip-forward-symbolic"
 
 function lengthStr(length: number) {
+    if (length < 1) return "0:00"
     const min = Math.floor(length / 60)
     const sec = Math.floor(length % 60)
     const sec0 = sec < 10 ? "0" : ""
@@ -142,5 +143,5 @@ export default () => Widget.Box({
   vertical: true,
   css: "min-height: 2px; min-width: 2px;",
   visible: players.as(p => p.length > 0),
-  children: players.as(p => p.map(Player))
+  children: players.as(p => p.filter(x => x.name === "mpd").map(Player)),
 })
