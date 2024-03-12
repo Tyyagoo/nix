@@ -14,7 +14,10 @@ in {
 
   disko.enableConfig = baremetal;
 
-  apps = { ncmpcpp = enabled; };
+  apps = {
+    discord = enabled;
+    ncmpcpp = enabled;
+  };
 
   desktop.hyprland = enabled;
 

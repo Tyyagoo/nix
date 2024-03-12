@@ -12,6 +12,7 @@ in {
 
     desktop.addons = { 
       ags = enabled;
+      mako = enabled;
       waybar = enabled;
     };
 
