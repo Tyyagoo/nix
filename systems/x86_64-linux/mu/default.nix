@@ -15,6 +15,7 @@ in {
   disko.enableConfig = baremetal;
 
   apps = {
+    bitwarden = enabled;
     discord = enabled;
     ncmpcpp = enabled;
   };
