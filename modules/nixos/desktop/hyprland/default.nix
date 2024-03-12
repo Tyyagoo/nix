@@ -9,6 +9,7 @@ in {
 
   config = mkIf cfg.enable {
     programs.hyprland = enabled;
+    programs.thunar = enabled;
 
     desktop.addons = { 
       ags = enabled;
@@ -25,6 +26,10 @@ in {
       };
     };
 
-    environment.systemPackages = with pkgs; [ kitty swww ];
+    environment.systemPackages = with pkgs; [
+      kitty
+      swww
+      wofi
+    ];
   };
 }

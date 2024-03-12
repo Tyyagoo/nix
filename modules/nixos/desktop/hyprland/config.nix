@@ -4,8 +4,7 @@
   exec-once = waybar & swww init
 
   $terminal = kitty
-  $fileManager = dolphin
-  $menu = wofi --show drun
+  $fileManager = thunar 
 
   env = XCURSOR_SIZE,24
   env = QT_QPA_PLATFORMTHEME,qt5ct # change to qt6ct if you have that
@@ -117,6 +116,8 @@
   bind = $mainMod, Q, killactive, 
   bind = $mainMod, Caps_Lock, exit, 
   bind = $mainMod, R, exec, hyprctl reload; ags -q; ags 
+  bind = $mainMod, E, exec, $fileManager
+  bind = SUPER, SUPER_L, exec, pkill wofi || wofi --show drun 
   # bind = $mainMod, P, pseudo, # dwindle
   # bind = $mainMod, J, togglesplit, # dwindle
 
@@ -165,4 +166,8 @@
   # Move/resize windows with mainMod + LMB/RMB and dragging
   bindm = $mainMod, mouse:272, movewindow
   bindm = $mainMod, mouse:273, resizewindow
+
+  bindel=, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+  bindel=, XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+  bindl=, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 ''
