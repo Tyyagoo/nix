@@ -18,9 +18,11 @@ in {
     bitwarden = enabled;
     discord = enabled;
     ncmpcpp = enabled;
+    steam = enabled;
   };
 
-  desktop.hyprland = enabled;
+  # desktop.hyprland = enabled;
+  desktop.gnome = enabled;
 
   security = { gpg = enabled; };
 
@@ -47,7 +49,10 @@ in {
     defaultEditor = true;
   };
 
-  environment.systemPackages = [ pkgs.firefox ];
+  environment.systemPackages = with pkgs; [ 
+    firefox
+    kitty
+  ];
 
   boot.loader.grub.enableCryptodisk = true;
   environment.etc."crypttab".text = ''

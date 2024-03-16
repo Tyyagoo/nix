@@ -27,7 +27,6 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
-      kitty
       swww
       wofi
     ];

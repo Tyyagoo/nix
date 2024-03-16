@@ -12,6 +12,10 @@ in {
       enable = true;
       displayManager.gdm = enabled;
       desktopManager.gnome = enabled;
+      xkb = {
+        layout = "br";
+        model = "abnt2";
+      };
     };
   };
 }
