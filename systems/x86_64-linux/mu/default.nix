@@ -51,6 +51,8 @@ in {
 
   environment.systemPackages = with pkgs; [ 
     firefox
+    godot_4
+    gdtoolkit
     kitty
   ];
 
