@@ -54,6 +54,10 @@ in {
     godot_4
     gdtoolkit
     kitty
+    openssl
+    pkg-config
+    gcc
+    rust-bin.stable.latest.default
   ];
 
   boot.loader.grub.enableCryptodisk = true;

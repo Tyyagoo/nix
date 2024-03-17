@@ -25,6 +25,8 @@
     impermanence.url = "github:nix-community/impermanence";
 
     ags.url = "github:Aylur/ags";
+
+    rust-overlay.url = "github:oxalica/rust-overlay";
   };
   outputs = inputs:
     let
@@ -41,7 +43,9 @@
       };
     in lib.mkFlake {
       channels-config.allowUnfree = true;
-      overlays = with inputs; [ ];
+      overlays = with inputs; [
+        rust-overlay.overlays.default
+      ];
       systems.modules.nixos = with inputs; [
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence
