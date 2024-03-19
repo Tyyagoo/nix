@@ -44,6 +44,32 @@ in {
 
   tools = { git = enabled; };
 
+  hardware.opengl = enabled;
+
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      runAsRoot = true;
+      swtpm = enabled;
+      ovmf = {
+        enable = true;
+        packages = [(pkgs.OVMF.override {
+          secureBoot = true;
+          tpmSupport = true;
+        }).fd];
+      };
+    };
+  };
+  programs.virt-manager = enabled;
+
+  specialisation."VFIO".configuration = {
+    system.nixos.tags = [ "with-vfio" ];
+    virt.vfio = {
+      enable = true;
+      devices = [ "1002:6987" ];
+    };
+  };
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
