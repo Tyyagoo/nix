@@ -8,6 +8,9 @@ async function wallpaper() {
 
   await sh([
     "swww", "img",
+    "--transition-step", "100",
+    "--transition-duration", "1.5",
+    "--transition-fps", "144",
     "--transition-type", "grow",
     "--transition-pos", pos.replace(" ", ""),
     options.wallpaper.value,
