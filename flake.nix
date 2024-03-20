@@ -26,6 +26,8 @@
 
     ags.url = "github:Aylur/ags";
 
+    matugen.url = "github:InioX/matugen";
+
     rust-overlay.url = "github:oxalica/rust-overlay";
   };
   outputs = inputs:

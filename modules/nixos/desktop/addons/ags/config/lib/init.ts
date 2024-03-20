@@ -1,5 +1,5 @@
 import css from "style/style"
-// import matugen from "./matugen"
+import matugen from "./matugen"
 import hyprland from "./hyprland"
 // import tmux from "./tmux"
 import gtk from "./gtk"
@@ -12,7 +12,7 @@ export async function init() {
     gtk()
     css()
     // tmux()
-    // matugen()
+    matugen()
     // lowBattery()
     // notifications()
     hyprland()

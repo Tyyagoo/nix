@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, format, virtual, config, ... }:
+{ lib, pkgs, inputs, format, virtual, config, system, ... }:
 with lib;
 with lib.nixty;
 let baremetal = !virtual && format != "iso";
