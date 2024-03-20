@@ -21,8 +21,8 @@ in {
     steam = enabled;
   };
 
-  # desktop.hyprland = enabled;
-  desktop.gnome = enabled;
+  desktop.hyprland = enabled;
+  # desktop.gnome = enabled;
 
   security = { gpg = enabled; };
 

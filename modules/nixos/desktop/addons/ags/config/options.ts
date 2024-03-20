@@ -75,6 +75,7 @@ const options = mkOptions(OPTIONS, {
       ]),
       end: opt<BarWidget[]>([
         "expander",
+        "wallpaper",
         "datetime",
         "sidepanel",
       ]),

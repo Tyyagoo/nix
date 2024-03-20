@@ -15,14 +15,14 @@ in {
     #   support32Bit = true;
     # };
 
-    # security.rtkit = enabled;
-    # services.pipewire = {
-    #   enable = true;
-    #   alsa.enable = true;
-    #   alsa.support32Bit = true;
-    #   pulse.enable = true;
-    #   wireplumber.enable = true;
-    # };
+    security.rtkit = enabled;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
+    };
 
     environment.systemPackages = with pkgs; [ yt-dlp pavucontrol pulsemixer ];
 

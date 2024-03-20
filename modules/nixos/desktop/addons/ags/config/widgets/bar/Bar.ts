@@ -3,6 +3,7 @@ import Datetime from "./widgets/Datetime"
 import Launcher from "./widgets/Launcher"
 import Sidepanel from "./widgets/Sidepanel"
 import Workspaces from "./widgets/Workspaces"
+import Wallpaper from "./widgets/Wallpaper"
 
 const pos = options.bar.position.bind()
 const gap = options.bar.gaps.bind()
@@ -15,6 +16,7 @@ const widgets = {
   datetime: Datetime,
   launcher: Launcher,
   sidepanel: Sidepanel,
+  wallpaper: Wallpaper,
   workspaces: Workspaces,
   expander: () => Widget.Box({ hexpand: true }), 
 } 
