@@ -1,6 +1,7 @@
 import options from "options"
 import Datetime from "./widgets/Datetime"
 import Launcher from "./widgets/Launcher"
+import Media from "./widgets/Media"
 import Sidepanel from "./widgets/Sidepanel"
 import Workspaces from "./widgets/Workspaces"
 import Wallpaper from "./widgets/Wallpaper"
@@ -15,6 +16,7 @@ export type BarWidget = keyof typeof widgets
 const widgets = {
   datetime: Datetime,
   launcher: Launcher,
+  media: Media,
   sidepanel: Sidepanel,
   wallpaper: Wallpaper,
   workspaces: Workspaces,

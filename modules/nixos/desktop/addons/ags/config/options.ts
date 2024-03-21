@@ -69,6 +69,7 @@ const options = mkOptions(OPTIONS, {
     layout: {
       start: opt<BarWidget[]>([
         "launcher",
+        "media",
       ]),
       center: opt<BarWidget[]>([
         "workspaces",
