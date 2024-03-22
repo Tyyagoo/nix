@@ -11,10 +11,10 @@ in {
       gnupg.agent = {
         enable = true;
         enableSSHSupport = true;
-        pinentryFlavor = "curses";
+        pinentryPackage = pkgs.pinentry-curses;
       };
     };
 
-    environment.systemPackages = with pkgs; [ gnupg pinentry-curses ];
+    environment.systemPackages = with pkgs; [ gnupg ];
   };
 }

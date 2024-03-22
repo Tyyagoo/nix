@@ -57,7 +57,11 @@ in {
     openssl
     pkg-config
     gcc
+    cmake
+    meson
+    ninja
     rust-bin.stable.latest.default
+    obsidian
   ];
 
   boot.loader.grub.enableCryptodisk = true;

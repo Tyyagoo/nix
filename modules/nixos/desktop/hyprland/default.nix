@@ -14,7 +14,7 @@ in {
     desktop.addons = { 
       ags = enabled;
       mako = enabled;
-      waybar = enabled;
+      # waybar = enabled; ~> wireplumber not found wtf
     };
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
