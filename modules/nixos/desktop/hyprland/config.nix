@@ -3,7 +3,7 @@
 
   exec-once = waybar & swww init
 
-  $terminal = kitty
+  $terminal = alacritty 
   $fileManager = thunar 
 
   env = XCURSOR_SIZE,24
@@ -94,6 +94,7 @@
   }
 
   windowrulev2 = float, class:(float)
+  windowrulev2 = float, title:(Picture-in-Picture)
   windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
 
   # See https://wiki.hyprland.org/Configuring/Keywords/ for more

@@ -15,6 +15,7 @@ in {
   disko.enableConfig = baremetal;
 
   apps = {
+    alacritty = enabled;
     bitwarden = enabled;
     discord = enabled;
     ncmpcpp = enabled;
@@ -36,6 +37,7 @@ in {
     network = enabled;
     nix = enabled;
     time = enabled;
+    shell.default = "nushell";
     storage.btrfs = mkIf baremetal {
       enable = true;
       wipeOnBoot = false;
@@ -53,7 +55,6 @@ in {
     firefox
     godot_4
     gdtoolkit
-    kitty
     openssl
     pkg-config
     gcc
