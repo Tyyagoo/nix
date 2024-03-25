@@ -7,8 +7,6 @@ const deps = [
   "theme",
   "bar.flatButtons",
   "bar.position",
-  // "bar.battery.charging",
-  // "bar.battery.blocks",
 ]
 
 const {
