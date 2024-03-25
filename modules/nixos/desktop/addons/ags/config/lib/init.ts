@@ -1,24 +1,19 @@
-import css from "style/style"
 import matugen from "./matugen"
 import hyprland from "./hyprland"
-// import tmux from "./tmux"
+import tmux from "./tmux"
 import gtk from "./gtk"
-// import lowBattery from "./battery"
+import lowBattery from "./battery"
 import swww from "./swww"
-// import notifications from "./notifications"
- 
-export async function init() {
-  try {
+import notifications from "./notifications"
+
+try {
     gtk()
-    css()
-    // tmux()
+    tmux()
     matugen()
-    // lowBattery()
-    // notifications()
+    lowBattery()
+    notifications()
     hyprland()
-    css() // most likely it is because of matugen
     swww()
-  } catch (error) {
+} catch (error) {
     logError(error)
-  }
 }
