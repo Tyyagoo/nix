@@ -14,7 +14,6 @@ in {
     desktop.addons = { 
       ags = enabled;
       mako = enabled;
-      # waybar = enabled; ~> wireplumber not found wtf
     };
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -27,6 +26,11 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
+      wl-clipboard
+      hyprpicker
+      wf-recorder
+      wayshot
+      swappy
       swww
       wofi
     ];

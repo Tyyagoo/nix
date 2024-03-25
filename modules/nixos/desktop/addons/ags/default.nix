@@ -29,6 +29,7 @@ in {
       nodejs
       dart-sass
       fd
+      fzf
       inputs.matugen.packages.${system}.default
     ];
   };
