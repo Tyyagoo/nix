@@ -34,9 +34,15 @@ in {
       GTK_THEME = theme.name;
     };
 
-    home.extraOptions.gtk = {
-      inherit theme cursorTheme iconTheme;
-      enable = true;
+    home.extraOptions = {
+      gtk = enabled // { inherit theme cursorTheme iconTheme; };
+      home = {
+        pointerCursor = cursorTheme // { gtk = enabled; };
+        sessionVariables = {
+          XCURSOR_THEME = cursorTheme.name;
+          XCURSOR_SIZE = "${toString cursorTheme.size}";
+        };
+      };
     };
   };
 }
