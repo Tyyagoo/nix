@@ -1,10 +1,9 @@
 import options from "options";
 import { sh, dependencies } from "./utils";
-import { memdup2 } from "types/@girs/glib-2.0/glib-2.0.cjs";
 
 export default function init() {
   options.wallpaper.connect("changed", () => matugen())
-  // options.autotheme.connect("changed", () => matugen())
+  options.autotheme.connect("changed", () => matugen())
 }
 
 function animate(...setters: Array<() => void>) {
@@ -15,7 +14,7 @@ function animate(...setters: Array<() => void>) {
 export async function matugen(
   type: "image" | "color" = "image",
   arg = options.wallpaper.value) {
-  if (!dependencies("matugen")) return
+  if (!options.autotheme.value || !dependencies("matugen")) return
 
   const colors = await sh(`matugen --dry-run -j hex ${type} ${arg}`)
   const c = JSON.parse(colors).colors as { light: Colors, dark: Colors }

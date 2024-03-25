@@ -1,0 +1,33 @@
+$bar-spacing: $spacing * .3;
+$button-radius: $radius;
+
+@mixin panel-button() {
+  background-color: $bg;
+  border: 1px solid black;
+  border-radius: $button-radius;
+
+  >* {
+    color: $primary-bg;
+    border-radius: $button-radius;
+    margin: $bar-spacing;
+  }
+
+  label,
+  image {
+    font-weight: bold;
+  }
+
+  &:hover {
+    background-color: $fg;
+
+    >* {
+      color: $primary-fg;
+    }
+  }
+}
+
+.bar {
+  .panel-button {
+    @include panel-button;
+  }
+}

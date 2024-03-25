@@ -27,6 +27,18 @@ function Player(player: MprisPlayer) {
     label: Utils.merge([player.bind("track_title"), player.bind("track_artists")], format_title) 
   })
 
+  const Toggle = Widget.Button({
+    class_name: "play-pause",
+    on_clicked: () => player.playPause(),
+    visible: player.bind("can_play"),
+    child: Widget.Icon({
+      icon: player.bind("play_back_status").as(s => {
+        if (s === "Playing") return icons.media.playing
+        return icons.media.stopped
+      })
+    }),
+  })
+
   const Separator = Widget.Label({
     label: " | ",
   })
@@ -41,6 +53,7 @@ function Player(player: MprisPlayer) {
 
   return Widget.Box({
     children: [
+      Toggle,
       Title,
       Separator,
       Artist,
