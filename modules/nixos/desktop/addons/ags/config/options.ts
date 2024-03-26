@@ -57,7 +57,7 @@ const options = mkOptions(OPTIONS, {
 
     font: {
         size: opt(13),
-        name: opt("Ubuntu Nerd Font"),
+        name: opt("Iosevka Nerd Font"),
     },
 
     bar: {
@@ -155,11 +155,7 @@ const options = mkOptions(OPTIONS, {
             favorites: opt([
                 [
                     "firefox",
-                    "org.gnome.Nautilus",
-                    "org.gnome.Calendar",
-                    "obsidian",
-                    "discord",
-                    "spotify",
+                    "vesktop",
                 ],
             ]),
         },

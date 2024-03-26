@@ -25,6 +25,19 @@ in {
       };
     };
 
+    xdg.portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+      ];
+    };
+
+    systemd.user.services.xdg-desktop-portal-gtk = {
+      wantedBy = [ "xdg-desktop-portal.service" ];
+      before = [ "xdg-desktop-portal.service" ];
+    };
+
     environment.systemPackages = with pkgs; [
       wl-clipboard
       hyprpicker
