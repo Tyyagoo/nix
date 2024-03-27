@@ -1,9 +1,14 @@
 { lib, pkgs, inputs, format, virtual, config, system, ... }:
 with lib;
 with lib.nixty;
-let baremetal = !virtual && format != "iso";
+let
+  baremetal = !virtual && format != "iso";
+  hardware = with inputs.hardware.nixosModules; [
+    common-cpu-amd
+    # common-gpu-amd
+  ];
 in {
-  imports = [
+  imports = hardware ++ [
     ./hardware.nix
     inputs.disko.nixosModules.disko
     (import ./disko.nix {
@@ -13,6 +18,7 @@ in {
   ];
 
   disko.enableConfig = baremetal;
+  # hardware.amdgpu.amdvlk = true;
 
   apps = {
     alacritty = enabled;
@@ -52,6 +58,7 @@ in {
   };
 
   environment.systemPackages = with pkgs; [ 
+    appimage-run
     firefox
     godot_4
     gdtoolkit
@@ -62,7 +69,6 @@ in {
     meson
     ninja
     rust-bin.stable.latest.default
-    obsidian
   ];
 
   boot.loader.grub.enableCryptodisk = true;
