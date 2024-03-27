@@ -48,7 +48,6 @@ in {
       wayshot
       swappy
       swww
-      wofi
     ];
   };
 }
