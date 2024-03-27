@@ -155,6 +155,8 @@ const options = mkOptions(OPTIONS, {
             favorites: opt([
                 [
                     "firefox",
+                    "obsidian",
+                    "bitwarden",
                     "vesktop",
                 ],
             ]),
