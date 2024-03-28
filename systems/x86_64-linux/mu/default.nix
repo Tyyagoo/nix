@@ -50,7 +50,10 @@ in {
     };
   };
 
-  tools = { git = enabled; };
+  tools = {
+    direnv = enabled;
+    git = enabled;
+  };
 
   programs.neovim = {
     enable = true;
