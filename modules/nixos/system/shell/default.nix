@@ -37,6 +37,9 @@ in {
 
     home.programs.nushell = mkIf (cfg.default == "nushell") {
       enable = true;
+      extraEnv = ''
+        $env.GPG_TTY = (tty)
+      '';
     };
   };
 }
