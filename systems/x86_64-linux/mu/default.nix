@@ -75,6 +75,7 @@ in {
 
   environment.systemPackages = with pkgs; [ 
     appimage-run
+    exercism
     firefox
     godot_4
     gdtoolkit
