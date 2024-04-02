@@ -21,19 +21,14 @@ in {
   # hardware.amdgpu.amdvlk = true;
 
   apps = {
-    alacritty = enabled;
-    bitwarden = enabled;
-    discord = enabled;
     ncmpcpp = enabled;
     steam = enabled;
   };
 
-  desktop.hyprland = enabled;
-  # desktop.gnome = enabled;
-
   services = { mpd' = enabled; };
 
   suites = {
+    desktop = enabled;
     dev = enabled;
     study = enabled;
   };
@@ -52,11 +47,6 @@ in {
       wipeOnBoot = false;
     };
   };
-
-  environment.systemPackages = with pkgs; [ 
-    appimage-run
-    firefox
-  ];
 
   boot.loader.grub.enableCryptodisk = true;
   environment.etc."crypttab".text = ''
