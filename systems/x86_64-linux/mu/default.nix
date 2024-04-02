@@ -31,11 +31,12 @@ in {
   desktop.hyprland = enabled;
   # desktop.gnome = enabled;
 
-  security = { gpg = enabled; };
-
   services = { mpd' = enabled; };
 
-  suites = { study = enabled; };
+  suites = {
+    dev = enabled;
+    study = enabled;
+  };
 
   system = {
     boot.efi = enabled;
@@ -52,29 +53,9 @@ in {
     };
   };
 
-  tools = {
-    direnv = enabled;
-    git = enabled;
-  };
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
-
   environment.systemPackages = with pkgs; [ 
     appimage-run
-    exercism
     firefox
-    godot_4
-    gdtoolkit
-    openssl
-    pkg-config
-    gcc
-    cmake
-    meson
-    ninja
-    rust-bin.stable.latest.default
   ];
 
   boot.loader.grub.enableCryptodisk = true;
