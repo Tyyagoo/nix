@@ -3,12 +3,11 @@ with lib;
 with lib.nixty;
 let cfg = config.apps.bitwarden;
 in {
-  options.apps.bitwarden = with types; { enable = mkBoolOpt false "Enable bitwarden"; };
+  options.apps.bitwarden = with types; {
+    enable = mkBoolOpt false "Enable bitwarden";
+  };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      bitwarden
-      bitwarden-cli
-    ];
+    environment.systemPackages = with pkgs; [ bitwarden bitwarden-cli ];
   };
 }

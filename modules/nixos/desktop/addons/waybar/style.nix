@@ -3,7 +3,7 @@
 
 { ... }: ''
   @import "./mocha.css";
-  
+
   /* Global */
   * {
     font-family: "Iosevka Nerd Font";
@@ -14,21 +14,21 @@
     background-color: shade(@base, 0.9);
     color: @text;
   }
-  
+
   @keyframes blink_red {
     to {
       background-color: @red;
       color: @base;
     }
   }
-  
+
   @keyframes blink_yellow {
     to {
       background-color: @yellow;
       color: @base;
     }
   }
-  
+
   .warning {
     animation-name: blink_yellow;
     animation-duration: 1s;
@@ -36,7 +36,7 @@
     animation-iteration-count: infinite;
     animation-direction: alternate;
   }
-  
+
   .critical, .urgent {
     animation-name: blink_red;
     animation-duration: 0.5s;
@@ -44,7 +44,7 @@
     animation-iteration-count: infinite;
     animation-direction: alternate;
   }
-  
+
   #clock, #memory, #temperature, #cpu, #custom-weather,
   #mpd, #idle_inhibitor, #pulseaudio, #network, 
   #battery, #custom-powermenu, #cava,
@@ -52,19 +52,19 @@
     padding-left: .6rem;
     padding-right: .6rem;
   }
-  
+
   /* Bar */
   window#waybar {
     background-color: transparent;
   }
-  
+
   window > box {
     background-color: transparent;
     margin: .3rem;
     margin-bottom: 0;
   }
-  
-  
+
+
   /* Workspaces */
   #workspaces button {
     padding-right: .4rem;
@@ -75,16 +75,16 @@
     background: transparent;
     transition: all ease 0.6s;
   }
-  
+
   /* Tooltip */
   tooltip {
     background-color: @base;
   }
-  
+
   tooltip label {
     color: @rosewater;
   }
-  
+
   /* battery */
   #battery {
     color: @mauve;
@@ -104,7 +104,7 @@
   #custom-powermenu {
     color: @red;
   }
-  
+
   /* mpd */
   #mpd.paused {
     color: @pink;
@@ -117,7 +117,7 @@
   #mpd {
     color: @lavender;
   }
-  
+
   /* Extra */
   #cava {
     color: @peach;

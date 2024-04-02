@@ -3,10 +3,11 @@ with lib;
 with lib.nixty;
 let
   baremetal = !virtual && format != "iso";
-  hardware = with inputs.hardware.nixosModules; [
-    common-cpu-amd
-    # common-gpu-amd
-  ];
+  hardware = with inputs.hardware.nixosModules;
+    [
+      common-cpu-amd
+      # common-gpu-amd
+    ];
 in {
   imports = hardware ++ [
     ./hardware.nix

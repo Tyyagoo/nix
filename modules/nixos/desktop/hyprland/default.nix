@@ -14,7 +14,7 @@ in {
     programs.hyprland = enabled;
     programs.thunar = enabled;
 
-    desktop.addons = { 
+    desktop.addons = {
       ags = enabled;
       mako = enabled;
     };
@@ -34,9 +34,7 @@ in {
     xdg.portal = {
       enable = true;
       xdgOpenUsePortal = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-      ];
+      extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
     };
 
     systemd.user.services.xdg-desktop-portal-gtk = {
@@ -69,18 +67,11 @@ in {
           "EDITOR,nvim"
         ];
 
-        exec = [
-          "pkill ags; ags"
-        ];
+        exec = [ "pkill ags; ags" ];
 
-        exec-once = [
-          "swww init"
-          "hyprctl setcursor Qogir 24"
-        ];
+        exec-once = [ "swww init" "hyprctl setcursor Qogir 24" ];
 
-        monitor = [
-         ",preferred,auto,1"
-        ];
+        monitor = [ ",preferred,auto,1" ];
 
         general = {
           layout = "dwindle";
@@ -100,19 +91,14 @@ in {
 
         input = {
           kb_layout = "br";
-          kb_model = "abnt2"; 
+          kb_model = "abnt2";
           kb_options = "caps:swapescape";
           numlock_by_default = true;
           sensitivity = 0;
         };
 
-        windowrule = let
-          f = regex: "float, ^(${regex})$";
-        in [
-          (f "float")
-          (f "Picture-in-Picture") 
-          (f "com.github.Aylur.ags")
-        ];
+        windowrule = let f = regex: "float, ^(${regex})$";
+        in [ (f "float") (f "Picture-in-Picture") (f "com.github.Aylur.ags") ];
 
         bind = let
           binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
@@ -120,7 +106,7 @@ in {
           mvtows = binding "SUPER SHIFT" "movetoworkspace";
           ws = binding "SUPER" "workspace";
           ags = "exec, ags";
-          workspaces = [1 2 3 4 5 6 7 8 9];
+          workspaces = [ 1 2 3 4 5 6 7 8 9 ];
         in [
           "SUPER, SUPER_L, ${ags} -t launcher"
           "SUPER, Tab,     ${ags} -t overview"
@@ -133,7 +119,7 @@ in {
           "SUPER, W, exec, firefox"
 
           "CTRL ALT, Delete, exit"
-          "CTRL SHIFT, R, exec, hyprctl reload" 
+          "CTRL SHIFT, R, exec, hyprctl reload"
           "ALT, Q, killactive"
           "ALT, Tab, focuscurrentorlast"
           "SUPER, F, togglefloating"
@@ -146,7 +132,7 @@ in {
           (mvfocus "l" "r")
           (mvfocus "h" "l")
         ] ++ (map (i: ws (toString i) (toString i)) workspaces)
-          ++ (map (i: mvtows (toString i) (toString i)) workspaces);
+        ++ (map (i: mvtows (toString i) (toString i)) workspaces);
 
         bindl = [
           ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
@@ -159,10 +145,8 @@ in {
           ",XF86AudioLowerVolume,  exec, ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-"
         ];
 
-        bindm = [
-          "SUPER, mouse:273, resizewindow"
-          "SUPER, mouse:272, movewindow"
-        ];
+        bindm =
+          [ "SUPER, mouse:273, resizewindow" "SUPER, mouse:272, movewindow" ];
 
         decoration = {
           drop_shadow = "yes";
@@ -177,7 +161,7 @@ in {
             size = 8;
             passes = 3;
             new_optimizations = "on";
-            noise = 0.01;
+            noise = 1.0e-2;
             contrast = 0.9;
             brightness = 0.8;
             popups = true;

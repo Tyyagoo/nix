@@ -1,10 +1,11 @@
-{ pkgs, ... }: 
-  {
+{ pkgs, ... }: {
   mainBar = {
     layer = "top";
-    modules-left = [ "custom/launcher" "idle_inhibitor" "mpd" "cava" "pulseaudio" ];
+    modules-left =
+      [ "custom/launcher" "idle_inhibitor" "mpd" "cava" "pulseaudio" ];
     modules-center = [ "hyprland/workspaces" ];
-    modules-right = [ "network" "cpu" "memory" "tray" "clock" "custom/powermenu" ];
+    modules-right =
+      [ "network" "cpu" "memory" "tray" "clock" "custom/powermenu" ];
 
     "custom/launcher" = {
       format = "󱄅";
@@ -22,11 +23,9 @@
     };
 
     "pulseaudio" = {
-      format = " {icon} {volume}%"; 
+      format = " {icon} {volume}%";
       format-muted = "󰝟 Muted";
-      format-icons = {
-        default = ["" "󰖀" "󰕾"];
-      };
+      format-icons = { default = [ "" "󰖀" "󰕾" ]; };
       states = {
         normal = 60;
         warning = 80;
@@ -48,7 +47,8 @@
       on-scroll-up = "mpc --quiet prev";
       on-scroll-down = "mpc --quiet next";
       smooth-scrolling-threshold = 5;
-      tooltip-format = "󰝚 {title} - {artist} ({elapsedTime:%M:%S}/{totalTime:%M:%S})";
+      tooltip-format =
+        "󰝚 {title} - {artist} ({elapsedTime:%M:%S}/{totalTime:%M:%S})";
     };
 
     "cava" = {
@@ -66,13 +66,11 @@
       waves = false;
       noise_reduction = 0.77;
       input_delay = 4;
-      format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ]; 
-      actions = {
-        on-click-right = "mode";
-      };
+      format-icons = [ "▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ];
+      actions = { on-click-right = "mode"; };
     };
 
-    "hyprland/workspaces" = { 
+    "hyprland/workspaces" = {
       format = "{icon}";
       format-icons = {
         active = " ";
@@ -86,7 +84,8 @@
       format-wifi = "󰖩 {essid} ({signalStrength}%)";
       format-ethernet = "󰖟 {ifname} ({ipaddr})";
       format-disconnected = "󰌙 Disconnected";
-      tooltip-format = "󰥔  {frequency} 󰅧  {bandwidthUpBits}   {bandwidthDownBits}";
+      tooltip-format =
+        "󰥔  {frequency} 󰅧  {bandwidthUpBits}   {bandwidthDownBits}";
     };
 
     "cpu" = {
@@ -105,9 +104,7 @@
       spacing = 5;
     };
 
-    "clock" = {
-      format = "{:  %H:%M %p   %A %d %b}";
-    };
+    "clock" = { format = "{:  %H:%M %p   %A %d %b}"; };
 
     "custom/powermenu" = {
       format = "󰐥";

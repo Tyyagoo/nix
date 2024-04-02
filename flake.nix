@@ -52,9 +52,7 @@
       };
     in lib.mkFlake {
       channels-config.allowUnfree = true;
-      overlays = with inputs; [
-        rust-overlay.overlays.default
-      ];
+      overlays = with inputs; [ rust-overlay.overlays.default ];
       systems.modules.nixos = with inputs; [
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence

@@ -16,8 +16,6 @@ in {
       firefox = enabled;
     };
 
-    environment.systemPackages = with pkgs; [
-      appimage-run
-    ];
+    environment.systemPackages = with pkgs; [ appimage-run ];
   };
 }

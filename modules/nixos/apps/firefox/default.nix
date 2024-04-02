@@ -1,17 +1,20 @@
 { options, config, lib, pkgs, inputs, system, ... }:
 with lib;
 with lib.nixty;
-let 
+let
   cfg = config.apps.firefox;
   name = config.user.name;
 in {
-  options.apps.firefox = with types; { enable = mkBoolOpt false "Enable firefox"; };
+  options.apps.firefox = with types; {
+    enable = mkBoolOpt false "Enable firefox";
+  };
 
   config = mkIf cfg.enable {
     home.programs.firefox = {
       enable = true;
       profiles.${name} = {
-        inherit (name);
+        inherit (name)
+        ;
         id = 0;
         settings = {
           "browser.newtabpage.activity-stream.showSponsored" = false;

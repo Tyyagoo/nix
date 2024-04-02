@@ -7,17 +7,17 @@ let
   uid = config.users.users.${user.name}.uid;
   ratesong = pkgs.writeScriptBin "ratesong" ''
     ## Usage: rate-music [0-5]
-    
+
     ## Path to playlists
     playlists="${cfg.dataDir}/playlists"
-    
+
     ## Prefix and suffix strings for the playlist file name
     pl_prefix='rate'
     pl_suffix='.m3u'
-    
+
     ## Get current song from cmus
     song=$(mpc current -f '%file%')
-    
+
     ## Error cases
     if [[ -z "$song" ]]; then
     	echo 'No song is playing.'
@@ -26,23 +26,23 @@ let
     	echo "Rating must be between 1 and 5. Or zero to delete the current song's rating."
     	exit 1
     fi
-    
+
     ## Path to lock file
     lock="/tmp/rate-music.lock"
-    
+
     ## Lock the file
     exec 9>"$lock"
     if ! flock -n 9; then
     	notify-send "Rating failed: Another instance is running."
     	exit 1
     fi
-    
+
     ## Strip "file " from the output
     song=''${song/file \///}
-    
+
     ## Temporary file for grepping and sorting
     tmp="$playlists/tmp.m3u"
-    
+
     ## Remove the song from all rating playlists
     for n in {1..5}; do
     	f="$playlists/''${pl_prefix}$n''${pl_suffix}"
@@ -51,7 +51,7 @@ let
     		mv -f $tmp $f
     	fi
     done
-    
+
     ## Append the song to the new rating playlist
     if [[ $1 -ne 0 ]]; then
     	f="$playlists/''${pl_prefix}$1''${pl_suffix}"
@@ -60,7 +60,7 @@ let
     	sort -u "$f" -o "$tmp"
     	mv -f $tmp $f
     fi
-    
+
     ## The lock file will be unlocked when the script ends
   '';
 in {

@@ -3,7 +3,9 @@ with lib;
 with lib.nixty;
 let cfg = config.module;
 in {
-  options.module = with types; { enable = mkBoolOpt true "Only disable on headless!"; };
+  options.module = with types; {
+    enable = mkBoolOpt true "Only disable on headless!";
+  };
 
   config = let
     theme = {
@@ -18,7 +20,7 @@ in {
     iconTheme = {
       name = "MoreWaita";
       package = pkgs.morewaita-icon-theme;
-    }; 
+    };
   in mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       brightnessctl
@@ -30,9 +32,7 @@ in {
       icon-library
     ];
 
-    environment.variables = {
-      GTK_THEME = theme.name;
-    };
+    environment.variables = { GTK_THEME = theme.name; };
 
     home.extraOptions = {
       gtk = enabled // { inherit theme cursorTheme iconTheme; };
