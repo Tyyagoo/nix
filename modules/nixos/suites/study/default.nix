@@ -19,6 +19,8 @@ in {
       };
     };
 
-    environment.systemPackages = with pkgs; [ zotero ];
+    environment.systemPackages = with pkgs; [ 
+      zotero_7
+    ];
   };
 }
