@@ -47,6 +47,7 @@ in {
       hyprpicker
       wf-recorder
       wayshot
+      slurp
       swappy
       swww
     ];
