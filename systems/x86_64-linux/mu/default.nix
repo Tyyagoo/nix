@@ -1,9 +1,15 @@
 { lib, pkgs, inputs, format, virtual, config, system, ... }:
 with lib;
 with lib.nixty;
-let baremetal = !virtual && format != "iso";
+let
+  baremetal = !virtual && format != "iso";
+  hardware = with inputs.hardware.nixosModules;
+    [
+      common-cpu-amd
+      # common-gpu-amd
+    ];
 in {
-  imports = [
+  imports = hardware ++ [
     ./hardware.nix
     inputs.disko.nixosModules.disko
     (import ./disko.nix {
@@ -13,21 +19,20 @@ in {
   ];
 
   disko.enableConfig = baremetal;
+  # hardware.amdgpu.amdvlk = true;
 
   apps = {
-    alacritty = enabled;
-    bitwarden = enabled;
-    discord = enabled;
     ncmpcpp = enabled;
     steam = enabled;
   };
 
-  desktop.hyprland = enabled;
-  # desktop.gnome = enabled;
-
-  security = { gpg = enabled; };
-
   services = { mpd' = enabled; };
+
+  suites = {
+    desktop = enabled;
+    dev = enabled;
+    study = enabled;
+  };
 
   system = {
     boot.efi = enabled;
@@ -43,27 +48,6 @@ in {
       wipeOnBoot = false;
     };
   };
-
-  tools = { git = enabled; };
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
-
-  environment.systemPackages = with pkgs; [ 
-    firefox
-    godot_4
-    gdtoolkit
-    openssl
-    pkg-config
-    gcc
-    cmake
-    meson
-    ninja
-    rust-bin.stable.latest.default
-    obsidian
-  ];
 
   boot.loader.grub.enableCryptodisk = true;
   environment.etc."crypttab".text = ''

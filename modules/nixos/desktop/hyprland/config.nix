@@ -1,7 +1,8 @@
 { }: ''
   monitor=,preferred,auto,auto
 
-  exec-once = waybar & swww init
+  exec-once = swww init
+  exec = ags -q & ags
 
   $terminal = alacritty 
   $fileManager = thunar 
@@ -104,9 +105,9 @@
   bind = $mainMod, RETURN, exec, $terminal
   bind = $mainMod, Q, killactive, 
   bind = $mainMod, Caps_Lock, exit, 
-  bind = $mainMod, R, exec, hyprctl reload; ags -q; ags 
+  bind = $mainMod, R, exec, hyprctl reload
   bind = $mainMod, E, exec, $fileManager
-  bind = SUPER, SUPER_L, exec, pkill wofi || wofi --show drun 
+  bind = SUPER, SUPER_L, exec, ags -t launcher
   # bind = $mainMod, P, pseudo, # dwindle
   # bind = $mainMod, J, togglesplit, # dwindle
 

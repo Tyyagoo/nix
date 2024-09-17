@@ -1,42 +1,43 @@
-import options from "options";
+import options from "options"
 
-const { logout, reboot, shutdown } = options.powermenu
+const { sleep, reboot, logout, shutdown } = options.powermenu
 
-export type Action = "logout" | "reboot" | "shutdown"
+export type Action = "sleep" | "reboot" | "logout" | "shutdown"
 
 class PowerMenu extends Service {
-  static {
-    Service.register(this, {}, {
-      "title": ["string"],
-      "cmd": ["string"],
-    })
-  }
+    static {
+        Service.register(this, {}, {
+            "title": ["string"],
+            "cmd": ["string"],
+        })
+    }
 
-  #title = ""
-  #cmd = ""
+    #title = ""
+    #cmd = ""
 
-  action(action: Action) {
-    [this.#cmd, this.#title] = {
-      logout: [logout.value, "Log Out"],
-      reboot: [reboot.value, "Reboot"],
-      shutdown: [shutdown.value, "Shutdown"],
-    }[action]
+    get title() { return this.#title }
+    get cmd() { return this.#cmd }
 
-    this.notify("cmd")
-    this.notify("title")
-    this.emit("changed")
-    App.closeWindow("powermenu")
-    App.openWindow("verification")
-  }
+    action(action: Action) {
+        [this.#cmd, this.#title] = {
+            sleep: [sleep.value, "Sleep"],
+            reboot: [reboot.value, "Reboot"],
+            logout: [logout.value, "Log Out"],
+            shutdown: [shutdown.value, "Shutdown"],
+        }[action]
 
-  readonly shutdown = () => {
-    this.action("shutdown")
-  }
+        this.notify("cmd")
+        this.notify("title")
+        this.emit("changed")
+        App.closeWindow("powermenu")
+        App.openWindow("verification")
+    }
 
-  get title() { return this.#title }
-  get cmd() { return this.#cmd }
+    readonly shutdown = () => {
+        this.action("shutdown")
+    }
 }
 
 const powermenu = new PowerMenu
-globalThis["powermenu"] = powermenu
+Object.assign(globalThis, { powermenu })
 export default powermenu

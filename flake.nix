@@ -2,6 +2,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    hardware.url = "github:nixos/nixos-hardware/master";
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,6 +31,11 @@
     matugen.url = "github:InioX/matugen";
 
     rust-overlay.url = "github:oxalica/rust-overlay";
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs:
     let
@@ -45,9 +52,7 @@
       };
     in lib.mkFlake {
       channels-config.allowUnfree = true;
-      overlays = with inputs; [
-        rust-overlay.overlays.default
-      ];
+      overlays = with inputs; [ rust-overlay.overlays.default ];
       systems.modules.nixos = with inputs; [
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence

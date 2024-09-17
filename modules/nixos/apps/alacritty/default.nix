@@ -3,7 +3,9 @@ with lib;
 with lib.nixty;
 let cfg = config.apps.alacritty;
 in {
-  options.apps.alacritty = with types; { enable = mkBoolOpt false "Enable alacritty"; };
+  options.apps.alacritty = with types; {
+    enable = mkBoolOpt false "Enable alacritty";
+  };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ alacritty ];
