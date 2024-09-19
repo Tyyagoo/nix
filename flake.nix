@@ -56,7 +56,7 @@
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence
-        # persist-retro.nixosModules.persist-retro
+        persist-retro.nixosModules.persist-retro
       ];
       templates = import ./templates { };
     };
