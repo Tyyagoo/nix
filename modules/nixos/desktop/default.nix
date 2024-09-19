@@ -28,7 +28,7 @@ in {
       theme.package
       cursorTheme.package
       iconTheme.package
-      gnome.adwaita-icon-theme
+      adwaita-icon-theme
       icon-library
     ];
 

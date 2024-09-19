@@ -32,11 +32,6 @@
                     "/root" = {
                       mountpoint = "/";
                       mountOptions = [ "compress=zstd " "noatime" ];
-                      blankSnapshot = true;
-                    };
-                    "/home" = {
-                      mountpoint = "/home";
-                      mountOptions = [ "compress=zstd " "noatime" ];
                     };
                     "/nix" = {
                       mountpoint = "/nix";
@@ -44,11 +39,6 @@
                     };
                     "/persist" = {
                       mountpoint = "/persist";
-                      mountOptions = [ "compress=zstd " "noatime" ];
-                      neededForBoot = true;
-                    };
-                    "/var/log" = {
-                      mountpoint = "/var/log";
                       mountOptions = [ "compress=zstd " "noatime" ];
                     };
                     "/swap" = {

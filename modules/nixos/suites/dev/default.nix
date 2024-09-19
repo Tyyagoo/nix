@@ -21,7 +21,7 @@ in {
     environment.systemPackages = with pkgs; [
       exercism
       godot_4
-      gdtoolkit
+      gdtoolkit_4
       openssl
       pkg-config
       gcc

@@ -3,19 +3,22 @@ with lib;
 with lib.nixty;
 let
   baremetal = !virtual && format != "iso";
-  hardware = with inputs.hardware.nixosModules;
-    [
-      common-cpu-amd
-      # common-gpu-amd
-    ];
 in {
-  imports = hardware ++ [
+  imports = [
+    inputs.hardware.nixosModules.common-cpu-amd
     ./hardware.nix
-    inputs.disko.nixosModules.disko
     (import ./disko.nix {
       ssd = "/dev/nvme0n1";
       hdd = "/dev/sda";
     })
+  ];
+
+  fileSystems."/persist".neededForBoot = true;
+
+  environment.persist.directories = [
+    "/var/log"
+    "/var/lib/nixos"
+    "/var/lib/systemd/coredump"
   ];
 
   disko.enableConfig = baremetal;
@@ -23,7 +26,6 @@ in {
 
   apps = {
     ncmpcpp = enabled;
-    steam = enabled;
   };
 
   services = { mpd' = enabled; };
@@ -31,7 +33,6 @@ in {
   suites = {
     desktop = enabled;
     dev = enabled;
-    study = enabled;
   };
 
   system = {
@@ -45,7 +46,7 @@ in {
     shell.default = "nushell";
     storage.btrfs = mkIf baremetal {
       enable = true;
-      wipeOnBoot = false;
+      wipeOnBoot = true;
     };
   };
 
@@ -62,5 +63,5 @@ in {
   #   };
   # };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }

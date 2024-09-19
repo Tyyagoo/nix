@@ -15,7 +15,7 @@ in {
     programs.thunar = enabled;
 
     desktop.addons = {
-      ags = enabled;
+      # ags = enabled;
       mako = enabled;
     };
 
