@@ -13,6 +13,8 @@ in {
     })
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+
   fileSystems."/persist".neededForBoot = true;
 
   environment.persist.directories = [
