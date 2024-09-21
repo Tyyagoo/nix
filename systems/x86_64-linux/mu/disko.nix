@@ -37,8 +37,8 @@
                       mountpoint = "/nix";
                       mountOptions = [ "compress=zstd " "noatime" ];
                     };
-                    "/persist" = {
-                      mountpoint = "/persist";
+                    "/home" = {
+                      mountpoint = "/home";
                       mountOptions = [ "compress=zstd " "noatime" ];
                     };
                     "/swap" = {
@@ -70,7 +70,7 @@
                 };
                 # https://discourse.nixos.org/t/decrypting-other-drives-after-the-root-device-has-been-decrypted-using-a-keyfile/21281
                 initrdUnlock = false;
-                additionalKeyFiles = [ "/tmp/secret.key" ];
+                # additionalKeyFiles = [ "/tmp/secret.key" ];
                 content = {
                   type = "filesystem";
                   format = "ext4";

@@ -11,7 +11,6 @@ with lib.nixty; {
     programs = mkOpt attrs { } "Programs to be managed by home-manager.";
     services = mkOpt attrs { } "Services to be managed by home-manager.";
     extraOptions = mkOpt attrs { } "Options to pass directly to home-manager.";
-    persist = mkOpt attrs { } "Files and directories to persist in the home";
   };
 
   config = {
@@ -28,8 +27,5 @@ with lib.nixty; {
       useUserPackages = true;
       users.${config.user.name} = mkAliasDefinitions options.home.extraOptions;
     };
-
-    environment.persistence."/persist".users.${config.user.name} =
-      mkIf config.system.storage.btrfs.wipeOnBoot (mkAliasDefinitions options.home.persist) ;
   };
 }

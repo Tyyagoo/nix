@@ -24,10 +24,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermanence.url = "github:nix-community/impermanence";
-    persist-retro.url = "github:Geometer1729/persist-retro";
-
-    ags.url = "github:Aylur/ags";
+    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
 
     rust-overlay.url = "github:oxalica/rust-overlay";
 
@@ -51,12 +48,13 @@
       };
     in lib.mkFlake {
       channels-config.allowUnfree = true;
-      overlays = with inputs; [ rust-overlay.overlays.default ];
+      overlays = with inputs; [
+        rust-overlay.overlays.default
+	hyprpanel.overlay
+      ];
       systems.modules.nixos = with inputs; [
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
-        impermanence.nixosModules.impermanence
-        persist-retro.nixosModules.persist-retro
       ];
       templates = import ./templates { };
     };

@@ -14,11 +14,6 @@ in {
     programs.hyprland = enabled;
     programs.thunar = enabled;
 
-    desktop.addons = {
-      # ags = enabled;
-      mako = enabled;
-    };
-
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";
       # ELECTRON_OZONE_PLATFORM_HINT = "auto";
@@ -43,6 +38,7 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
+      hyprpanel
       wl-clipboard
       hyprpicker
       wf-recorder
@@ -77,8 +73,11 @@ in {
         general = {
           layout = "dwindle";
           resize_on_border = true;
-          no_cursor_warps = true;
         };
+
+	cursor = {
+          no_warps = true;
+	};
 
         dwindle = {
           pseudotile = "yes";
@@ -125,7 +124,7 @@ in {
           "ALT, Tab, focuscurrentorlast"
           "SUPER, F, togglefloating"
           "SUPER, G, fullscreen"
-          "SUPER, O, fakefullscreen"
+          "SUPER, O, fullscreenstate, -1 2"
           "SUPER, P, togglesplit"
 
           (mvfocus "k" "u")

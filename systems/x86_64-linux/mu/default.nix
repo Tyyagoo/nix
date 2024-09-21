@@ -1,9 +1,6 @@
 { lib, pkgs, inputs, format, virtual, config, system, ... }:
 with lib;
-with lib.nixty;
-let
-  baremetal = !virtual && format != "iso";
-in {
+with lib.nixty; {
   imports = [
     inputs.hardware.nixosModules.common-cpu-amd
     ./hardware.nix
@@ -15,15 +12,7 @@ in {
 
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
-  fileSystems."/persist".neededForBoot = true;
-
-  environment.persist.directories = [
-    "/var/log"
-    "/var/lib/nixos"
-    "/var/lib/systemd/coredump"
-  ];
-
-  disko.enableConfig = baremetal;
+  disko.enableConfig = true;
   # hardware.amdgpu.amdvlk = true;
 
   apps = {
@@ -46,15 +35,13 @@ in {
     nix = enabled;
     time = enabled;
     shell.default = "nushell";
-    storage.btrfs = mkIf baremetal {
-      enable = true;
-      wipeOnBoot = true;
-    };
   };
+
+  boot.supportedFilesystems = [ "btrfs" ];
 
   boot.loader.grub.enableCryptodisk = true;
   environment.etc."crypttab".text = ''
-    cryptsec /dev/disk/by-partlabel/disk-secondary-luks /persist/secret.key
+    cryptsec /dev/disk/by-partlabel/disk-secondary-luks /home/tyyago/.keyfile
   '';
 
   # virtualisation.vmVariant = {
