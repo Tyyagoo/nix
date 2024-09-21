@@ -24,7 +24,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
+    ags.url = "github:aylur/ags/v2";
 
     rust-overlay.url = "github:oxalica/rust-overlay";
 
@@ -33,6 +33,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
   outputs = inputs:
     let
       lib = inputs.snowfall-lib.mkLib {
@@ -48,14 +49,14 @@
       };
     in lib.mkFlake {
       channels-config.allowUnfree = true;
-      overlays = with inputs; [
-        rust-overlay.overlays.default
-        hyprpanel.overlay
-      ];
+
+      overlays = with inputs; [ rust-overlay.overlays.default ];
+
       systems.modules.nixos = with inputs; [
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
       ];
+
       templates = import ./templates { };
     };
 }
