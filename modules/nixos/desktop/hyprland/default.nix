@@ -75,9 +75,7 @@ in {
           resize_on_border = true;
         };
 
-	cursor = {
-          no_warps = true;
-	};
+        cursor = { no_warps = true; };
 
         dwindle = {
           pseudotile = "yes";

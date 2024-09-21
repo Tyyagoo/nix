@@ -15,9 +15,7 @@ with lib.nixty; {
   disko.enableConfig = true;
   # hardware.amdgpu.amdvlk = true;
 
-  apps = {
-    ncmpcpp = enabled;
-  };
+  apps = { ncmpcpp = enabled; };
 
   services = { mpd' = enabled; };
 

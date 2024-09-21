@@ -50,7 +50,7 @@
       channels-config.allowUnfree = true;
       overlays = with inputs; [
         rust-overlay.overlays.default
-	hyprpanel.overlay
+        hyprpanel.overlay
       ];
       systems.modules.nixos = with inputs; [
         disko.nixosModules.disko

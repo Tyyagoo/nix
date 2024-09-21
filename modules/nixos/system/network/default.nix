@@ -7,7 +7,5 @@ in {
     enable = mkBoolOpt false "Enable Network Manager.";
   };
 
-  config = mkIf cfg.enable {
-    networking.networkmanager.enable = true;
-  };
+  config = mkIf cfg.enable { networking.networkmanager.enable = true; };
 }
