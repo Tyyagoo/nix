@@ -14,9 +14,7 @@ in {
     programs.hyprland = enabled;
     programs.thunar = enabled;
 
-    desktop.addons = {
-      ags = enabled;
-    };
+    desktop.addons = { ags = enabled; };
 
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";

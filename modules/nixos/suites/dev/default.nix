@@ -19,6 +19,7 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
+      vscodium
       exercism
       godot_4
       gdtoolkit_4
