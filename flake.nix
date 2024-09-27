@@ -1,41 +1,38 @@
 {
   outputs = inputs:
-    let
-      namespace = "nixty";
-      specialArgs = inputs // { inherit namespace; };
-    in {
-      nixosConfigurations = import ./nixos/configurations specialArgs;
-      nixosModules = import ./nixos/modules;
+    inputs.snowfall-lib.mkFlake {
+      inherit inputs;
+      src = ./.;
+      snowfall.namespace = "nixty";
 
-      homeConfigurations = import ./home/configurations specialArgs;
-      homeModules = import ./home/modules;
+      channels-config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [ ];
+      };
 
-      lib = import ./lib specialArgs;
+      overlays = with inputs; [ snowfall-flake.overlay ];
 
-      packages = import ./packages specialArgs;
+      systems.modules.nixos = with inputs; [
+        home-manager.nixosModules.home-manager
+        disko.nixosModules.disko
+      ];
     };
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    hardware.url = "github:nixos/nixos-hardware";
-
-    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    snowfall-lib.url = "github:snowfallorg/lib";
+    snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
+
+    snowfall-flake.url = "github:snowfallorg/flake";
+    snowfall-flake.inputs.nixpkgs.follows = "nixpkgs";
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixos-generators.url = "github:nix-community/nixos-generators";
-    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
-
-    comma.url = "github:nix-community/comma";
-    comma.inputs.nixpkgs.follows = "nixpkgs";
-
-    nix-ld.url = "github:Mic92/nix-ld";
-    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
-
-    flake-checker.url = "github:DeterminateSystems/flake-checker";
-    flake-checker.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 }
