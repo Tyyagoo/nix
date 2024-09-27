@@ -10,16 +10,21 @@
         permittedInsecurePackages = [ ];
       };
 
-      overlays = with inputs; [ snowfall-flake.overlay ];
+      overlays = with inputs; [ snowfall-flake.overlays."package/flake" ];
 
       systems.modules.nixos = with inputs; [
         home-manager.nixosModules.home-manager
         disko.nixosModules.disko
+        nur.nixosModules.nur
       ];
+
+      templates = import ./templates { };
     };
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    nur.url = "github:nix-community/nur";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";

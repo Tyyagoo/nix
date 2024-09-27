@@ -10,4 +10,8 @@ with lib; rec {
   mkBoolOpt' = mkOpt' types.bool;
 
   mkEnableOpt = mkBoolOpt' false;
+
+  mkStrOpt = default: description: mkOpt types.str default description;
+
+  mkStrOpt' = default: mkStrOpt default null;
 }
