@@ -1,0 +1,5 @@
+[
+  ./audio
+  ./boot/efi
+  ./locale
+]
