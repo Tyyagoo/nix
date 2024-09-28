@@ -10,7 +10,6 @@ in {
   config = mkIf cfg.enable {
     home.programs.firefox = {
       enable = true;
-      package = pkgs.librewolf;
       profiles.${name} = {
         inherit (name)
         ;

@@ -9,11 +9,14 @@ in {
   config = mkIf cfg.enable {
     "${namespace}" = {
       apps = {
+        alacritty.enable = true;
         bitwarden.enable = true;
         brave.enable = true;
         discord.enable = true;
         firefox.enable = true;
       };
+
+      desktop = { hyprland.enable = true; };
 
       system = {
         audio.enable = true;
