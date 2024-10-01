@@ -28,7 +28,7 @@ in
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
         noto-fonts-color-emoji
-        (nerdfonts.override { fonts = [ "Iosevka" ]; })
+        (nerdfonts.override { fonts = [ "Iosevka" "JetBrainsMono" ]; })
       ]
       ++ cfg.fonts;
   };

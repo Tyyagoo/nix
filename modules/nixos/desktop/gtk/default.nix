@@ -63,7 +63,7 @@ in
           pointerCursor = cursorTheme // {
             gtk.enable = true;
           };
-          sessionVariables = {
+         sessionVariables = {
             XCURSOR_THEME = cursorTheme.name;
             XCURSOR_SIZE = "${toString cursorTheme.size}";
           };
