@@ -1,27 +1,30 @@
-{ config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib.${namespace};
 let
   cfg = config.${namespace}.desktop.hyprland;
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   wpctl = "${pkgs.wireplumber}/bin/wpctl";
   inherit (lib) mkIf;
-in {
-  options.${namespace}.desktop.hyprland = { enable = mkEnableOpt; };
+in
+{
+  options.${namespace}.desktop.hyprland = {
+    enable = mkEnableOpt;
+  };
 
   config = mkIf cfg.enable {
-    "${namespace}" = {
-      desktop = {
-        gtk.enable = true;
-        qt.enable = true;
-      };
-    };
-
     programs.hyprland.enable = true;
     xdg.portal.xdgOpenUsePortal = true;
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     environment.systemPackages = with pkgs; [
+      hyprpanel
       wl-clipboard
       hyprpicker
       wf-recorder
@@ -48,9 +51,11 @@ in {
           "EDITOR,nvim"
         ];
 
-        exec = [ "pkill ags; ags" ];
-
-        exec-once = [ "swww init" "hyprctl setcursor Qogir 24" ];
+        exec-once = [
+          "swww init"
+          "hyprctl setcursor Qogir 24"
+          "hyprpanel"
+        ];
 
         monitor = [ ",preferred,auto,1" ];
 
@@ -81,42 +86,64 @@ in {
           sensitivity = 0;
         };
 
-        windowrule = let f = regex: "float, ^(${regex})$";
-        in [ (f "float") (f "Picture-in-Picture") (f "com.github.Aylur.ags") ];
+        windowrule =
+          let
+            f = regex: "float, ^(${regex})$";
+          in
+          [
+            (f "float")
+            (f "Picture-in-Picture")
+            (f "com.github.Aylur.ags")
+          ];
 
-        bind = let
-          binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
-          mvfocus = binding "SUPER" "movefocus";
-          mvtows = binding "SUPER SHIFT" "movetoworkspace";
-          ws = binding "SUPER" "workspace";
-          ags = "exec, ags";
-          workspaces = [ 1 2 3 4 5 6 7 8 9 ];
-        in [
-          "SUPER, SUPER_L, ${ags} -t launcher"
-          "SUPER, Tab,     ${ags} -t overview"
-          ",XF86PowerOff,  ${ags} -r 'powermenu.shutdown()'"
-          ",XF86Launch4,   ${ags} -r 'recorder.start()'"
-          ",Print,         ${ags} -r 'recorder.screenshot()'"
-          "SHIFT,Print,    ${ags} -r 'recorder.screenshot(true)'"
+        bind =
+          let
+            binding =
+              mod: cmd: key: arg:
+              "${mod}, ${key}, ${cmd}, ${arg}";
+            mvfocus = binding "SUPER" "movefocus";
+            mvtows = binding "SUPER SHIFT" "movetoworkspace";
+            ws = binding "SUPER" "workspace";
+            ags = "exec, ags";
+            workspaces = [
+              1
+              2
+              3
+              4
+              5
+              6
+              7
+              8
+              9
+            ];
+          in
+          [
+            "SUPER, SUPER_L, ${ags} -t launcher"
+            "SUPER, Tab,     ${ags} -t overview"
+            ",XF86PowerOff,  ${ags} -r 'powermenu.shutdown()'"
+            ",XF86Launch4,   ${ags} -r 'recorder.start()'"
+            ",Print,         ${ags} -r 'recorder.screenshot()'"
+            "SHIFT,Print,    ${ags} -r 'recorder.screenshot(true)'"
 
-          "SUPER, Return, exec, alacritty"
-          "SUPER, W, exec, firefox"
+            "SUPER, Return, exec, alacritty"
+            "SUPER, W, exec, firefox"
 
-          "CTRL ALT, Delete, exit"
-          "CTRL SHIFT, R, exec, hyprctl reload"
-          "ALT, Q, killactive"
-          "ALT, Tab, focuscurrentorlast"
-          "SUPER, F, togglefloating"
-          "SUPER, G, fullscreen"
-          "SUPER, O, fullscreenstate, -1 2"
-          "SUPER, P, togglesplit"
+            "CTRL ALT, Delete, exit"
+            "CTRL SHIFT, R, exec, hyprctl reload"
+            "ALT, Q, killactive"
+            "ALT, Tab, focuscurrentorlast"
+            "SUPER, F, togglefloating"
+            "SUPER, G, fullscreen"
+            "SUPER, O, fullscreenstate, -1 2"
+            "SUPER, P, togglesplit"
 
-          (mvfocus "k" "u")
-          (mvfocus "j" "d")
-          (mvfocus "l" "r")
-          (mvfocus "h" "l")
-        ] ++ (map (i: ws (toString i) (toString i)) workspaces)
-        ++ (map (i: mvtows (toString i) (toString i)) workspaces);
+            (mvfocus "k" "u")
+            (mvfocus "j" "d")
+            (mvfocus "l" "r")
+            (mvfocus "h" "l")
+          ]
+          ++ (map (i: ws (toString i) (toString i)) workspaces)
+          ++ (map (i: mvtows (toString i) (toString i)) workspaces);
 
         bindl = [
           ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
@@ -129,8 +156,10 @@ in {
           ",XF86AudioLowerVolume,  exec, ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-"
         ];
 
-        bindm =
-          [ "SUPER, mouse:273, resizewindow" "SUPER, mouse:272, movewindow" ];
+        bindm = [
+          "SUPER, mouse:273, resizewindow"
+          "SUPER, mouse:272, movewindow"
+        ];
 
         decoration = {
           drop_shadow = "yes";

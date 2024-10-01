@@ -1,9 +1,16 @@
-{ config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib.${namespace};
 let
   cfg = config.${namespace}.system.shell;
   inherit (lib) mkIf types;
-in {
+in
+{
   options.${namespace}.system.shell = with types; {
     default = mkOpt (enum [ "nushell" ]) "nushell" "Which shell to use";
   };
@@ -23,7 +30,9 @@ in {
     #   enableNushellIntegration = true;
     # };
 
-    environment.shellAliases = { ".." = "cd .."; };
+    environment.shellAliases = {
+      ".." = "cd ..";
+    };
 
     home.programs.starship = {
       enable = true;

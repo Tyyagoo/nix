@@ -1,5 +1,6 @@
 {
-  outputs = inputs:
+  outputs =
+    inputs:
     inputs.snowfall-lib.mkFlake {
       inherit inputs;
       src = ./.;
@@ -10,7 +11,10 @@
         permittedInsecurePackages = [ ];
       };
 
-      overlays = with inputs; [ snowfall-flake.overlays."package/flake" ];
+      overlays = with inputs; [
+        hyprpanel.overlay
+        snowfall-flake.overlays."package/flake"
+      ];
 
       systems.modules.nixos = with inputs; [
         home-manager.nixosModules.home-manager
@@ -39,5 +43,7 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
+
+    hyprpanel.url = "github:jas-singhfsu/hyprpanel";
   };
 }

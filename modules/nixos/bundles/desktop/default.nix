@@ -1,10 +1,19 @@
-{ config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib.${namespace};
 let
   cfg = config.${namespace}.bundles.desktop;
   inherit (lib) mkIf;
-in {
-  options.${namespace}.bundles.desktop = { enable = mkEnableOpt; };
+in
+{
+  options.${namespace}.bundles.desktop = {
+    enable = mkEnableOpt;
+  };
 
   config = mkIf cfg.enable {
     "${namespace}" = {
@@ -16,7 +25,11 @@ in {
         firefox.enable = true;
       };
 
-      desktop = { hyprland.enable = true; };
+      desktop = {
+        hyprland.enable = true;
+        gtk.enable = true;
+        qt.enable = true;
+      };
 
       system = {
         audio.enable = true;

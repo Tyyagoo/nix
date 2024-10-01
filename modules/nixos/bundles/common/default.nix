@@ -1,10 +1,19 @@
-{ config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib.${namespace};
 let
   cfg = config.${namespace}.bundles.common;
   inherit (lib) mkIf;
-in {
-  options.${namespace}.bundles.common = { enable = mkEnableOpt; };
+in
+{
+  options.${namespace}.bundles.common = {
+    enable = mkEnableOpt;
+  };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [

@@ -1,17 +1,23 @@
-{ config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib.${namespace};
 let
   cfg = config.${namespace}.tools.git;
   hasGpg = config.${namespace}.tools.gpg.enable;
   user = config.user;
   inherit (lib) mkIf types;
-in {
+in
+{
   options.${namespace}.tools.git = {
     enable = mkEnableOpt;
     userName = mkOpt' types.str user.displayName;
     userEmail = mkOpt' types.str user.email;
-    signingKey =
-      mkOpt types.str "D12808250532E16B" "The key ID to sign commits with.";
+    signingKey = mkOpt types.str "D12808250532E16B" "The key ID to sign commits with.";
   };
 
   config = mkIf cfg.enable {
@@ -31,16 +37,29 @@ in {
         };
 
         extraConfig = {
-          init = { defaultBranch = "main"; };
-          pull = { rebase = true; };
-          push = { autoSetupRemote = true; };
-          core = { whitespace = "trailing-space,space-before-tab"; };
+          init = {
+            defaultBranch = "main";
+          };
+          pull = {
+            rebase = true;
+          };
+          push = {
+            autoSetupRemote = true;
+          };
+          core = {
+            whitespace = "trailing-space,space-before-tab";
+          };
         };
 
-        ignores = [ ".direnv" "result" ];
+        ignores = [
+          ".direnv"
+          "result"
+        ];
       };
 
-      lazygit = { enable = true; };
+      lazygit = {
+        enable = true;
+      };
 
       gh = {
         enable = true;
@@ -51,7 +70,9 @@ in {
         };
       };
 
-      gh-dash = { enable = true; };
+      gh-dash = {
+        enable = true;
+      };
     };
   };
 }

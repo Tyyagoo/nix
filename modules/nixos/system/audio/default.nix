@@ -1,9 +1,16 @@
-{ config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib.${namespace};
 let
   cfg = config.${namespace}.system.audio;
   inherit (lib) mkIf;
-in {
+in
+{
   options.${namespace}.system.audio = {
     enable = mkEnableOpt;
     lowLatency = mkBoolOpt false "Enable low-latency setup.";

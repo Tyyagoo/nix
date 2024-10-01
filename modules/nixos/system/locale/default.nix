@@ -1,7 +1,15 @@
-{ config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib.${namespace};
-let cfg = config.${namespace}.system.locale;
-in {
+let
+  cfg = config.${namespace}.system.locale;
+in
+{
   options.${namespace}.system.locale = {
     systemLanguage = mkStrOpt' "en_US";
     systemFormat = mkStrOpt' "pt_BR";

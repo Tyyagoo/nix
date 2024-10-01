@@ -1,4 +1,5 @@
-{ namespace, pkgs, ... }: {
+{ namespace, pkgs, ... }:
+{
   imports = [
     ./hardware.nix
     (import ./disko.nix {

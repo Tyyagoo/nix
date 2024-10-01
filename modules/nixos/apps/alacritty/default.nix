@@ -1,9 +1,16 @@
-{ config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib.${namespace};
 let
   cfg = config.${namespace}.apps.alacritty;
   inherit (lib) mkIf types;
-in {
+in
+{
   options.${namespace}.apps.alacritty = with types; {
     enable = mkEnableOpt;
   };

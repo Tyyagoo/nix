@@ -1,4 +1,10 @@
-{ config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib.${namespace};
 let
   cfg = config.${namespace}.tools.gpg;
@@ -8,8 +14,11 @@ let
     gpgconf --launch gpg-agent
   '';
   inherit (lib) mkIf;
-in {
-  options.${namespace}.tools.gpg = { enable = mkEnableOpt; };
+in
+{
+  options.${namespace}.tools.gpg = {
+    enable = mkEnableOpt;
+  };
 
   config = mkIf cfg.enable {
     home.services.gpg-agent = {
@@ -17,8 +26,7 @@ in {
       enableSshSupport = true;
       sshKeys = [ ];
       enableExtraSocket = true;
-      pinentryPackage =
-        if hasGtk then pkgs.pinentry-gnome3 else pkgs.pinentry-tty;
+      pinentryPackage = if hasGtk then pkgs.pinentry-gnome3 else pkgs.pinentry-tty;
     };
 
     # TODO: research
@@ -34,10 +42,12 @@ in {
         enable = true;
         # settings.trust-model = "tofu+pgp";
 
-        publicKeys = [{
-          source = ./public.pgp;
-          trust = 5;
-        }];
+        publicKeys = [
+          {
+            source = ./public.pgp;
+            trust = 5;
+          }
+        ];
       };
     };
 

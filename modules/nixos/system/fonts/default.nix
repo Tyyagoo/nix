@@ -1,9 +1,16 @@
-{ config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib.${namespace};
 let
   cfg = config.${namespace}.system.fonts;
   inherit (lib) mkIf types;
-in {
+in
+{
   options.${namespace}.system.fonts = with types; {
     enable = mkEnableOpt;
     fonts = mkOpt (listOf package) [ ] "Custom font packages to install";
@@ -14,13 +21,15 @@ in {
 
     environment.systemPackages = [ pkgs.font-manager ];
 
-    fonts.packages = with pkgs;
+    fonts.packages =
+      with pkgs;
       [
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-cjk-serif
         noto-fonts-color-emoji
         (nerdfonts.override { fonts = [ "Iosevka" ]; })
-      ] ++ cfg.fonts;
+      ]
+      ++ cfg.fonts;
   };
 }
