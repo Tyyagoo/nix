@@ -45,5 +45,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     hyprpanel.url = "github:jas-singhfsu/hyprpanel";
+
+    stylix.url = "github:danth/stylix";
   };
 }

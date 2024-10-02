@@ -29,6 +29,7 @@ in
         hyprland.enable = true;
         gtk.enable = true;
         qt.enable = true;
+        theme.enable = true;
       };
 
       system = {

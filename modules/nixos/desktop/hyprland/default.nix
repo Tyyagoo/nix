@@ -41,7 +41,7 @@ in
 
       settings = {
         env = [
-          "XCURSOR_SIZE,24"
+          # "XCURSOR_SIZE,24"
           "QT_QPA_PLATFORMTHEME,qt5ct"
           "GDK_BACKEND,wayland,x11"
           "QT_QPA_PLATFORM,wayland"
@@ -53,7 +53,7 @@ in
 
         exec-once = [
           "swww init"
-          "hyprctl setcursor Qogir 24"
+          # "hyprctl setcursor Qogir 24"
           "hyprpanel"
         ];
 
@@ -165,7 +165,7 @@ in
           drop_shadow = "yes";
           shadow_range = 8;
           shadow_render_power = 2;
-          "col.shadow" = "rgba(00000044)";
+          # "col.shadow" = "rgba(00000044)";
 
           dim_inactive = false;
 
