@@ -15,6 +15,7 @@
     ./virtualisation.nix
     ./shell.nix
     ./steam.nix
+    ./locale.nix
     ./hardware.nix
   ];
 }
