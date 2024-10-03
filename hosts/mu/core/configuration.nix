@@ -13,7 +13,6 @@
     ./system.nix
     ./fonts.nix
     ./virtualisation.nix
-    ./bluetooth.nix
     ./shell.nix
     ./steam.nix
     ./hardware.nix

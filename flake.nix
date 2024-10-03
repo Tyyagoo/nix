@@ -41,6 +41,11 @@
       url = "github:sdhand/picom";
       flake = false;
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -79,16 +84,14 @@
         };
 
         modules =
-          [ mainModule ]
-          ++ (
-            if !config.modules.homeManager.enable then
-              [ ]
-            else
-              (with inputs; [
-                home-manager.nixosModules.home-manager
-                (mainModule + /home-manager.nix)
-              ])
-          );
+          [
+            mainModule
+            inputs.disko.nixosModules.disko
+          ]
+          ++ nixpkgs.lib.optionals (!config.modules.homeManager.enable) [
+            inputs.home-manager.nixosModules.home-manager
+            (mainModule + /home-manager.nix)
+          ];
       };
     };
 }
