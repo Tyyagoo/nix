@@ -6,6 +6,8 @@
     ./app-editors/vscode
     ./app-editors/neovim
     ./app-misc/tmux.nix
+    ./app-misc/git.nix
+    ./app-misc/gpg.nix
 
     # not gentoo name-style :sob:
     ./pkgs
