@@ -3,7 +3,7 @@
   wallpaper = ./wallpapers/cozy.png;
 
   # no config yet
-  neovim = _: {};
+  neovim = _: { };
 
   palette = rec {
     scheme = "dark";
@@ -29,11 +29,9 @@
       white = "#dfe2e5";
     };
 
-    bright =
-      normal
-      // {
-        black = "#404040";
-        white = "#f3f4f5";
-      };
+    bright = normal // {
+      black = "#404040";
+      white = "#f3f4f5";
+    };
   };
 }

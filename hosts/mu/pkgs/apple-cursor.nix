@@ -11,14 +11,17 @@ stdenvNoCC.mkDerivation rec {
 
   inherit src;
 
-  buildInputs = let
-    python = pkgs.python3.withPackages (ps:
-      with ps; [
-        clickgen
-        attrs
-      ]);
-  in
-    with pkgs; [
+  buildInputs =
+    let
+      python = pkgs.python3.withPackages (
+        ps: with ps; [
+          clickgen
+          attrs
+        ]
+      );
+    in
+    with pkgs;
+    [
       yarn
       python
     ];

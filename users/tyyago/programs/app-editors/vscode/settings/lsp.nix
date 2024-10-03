@@ -1,8 +1,9 @@
 {
   lib,
   pkgs,
-}: {
-  "black-formatter.path" = [(lib.getExe pkgs.black)];
+}:
+{
+  "black-formatter.path" = [ (lib.getExe pkgs.black) ];
   "stylua.styluaPath" = lib.getExe pkgs.stylua;
   "Lua.misc.executablePath" = "${pkgs.sumneko-lua-language-server}/bin/lua-language-server";
   "nix.serverPath" = lib.getExe pkgs.nil;

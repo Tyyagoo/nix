@@ -43,24 +43,28 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    config = import ./config.nix;
-    inherit (config) system;
-  in
-    with config; rec {
-      devShells.${system}.default = let
-        nixSystem = nixosConfigurations.${hostname};
-        vm = nixSystem.config.system.build.vm;
-        pkgs = import nixpkgs { inherit system; };
-        lib = pkgs.lib;
-      in
+  outputs =
+    {
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
+    let
+      config = import ./config.nix;
+      inherit (config) system;
+    in
+    with config;
+    rec {
+      devShells.${system}.default =
+        let
+          nixSystem = nixosConfigurations.${hostname};
+          vm = nixSystem.config.system.build.vm;
+          pkgs = import nixpkgs { inherit system; };
+          lib = pkgs.lib;
+        in
         pkgs.mkShell {
           name = "dev-shell";
-          buildInputs = [vm];
+          buildInputs = [ vm ];
           shellHook = ''
             echo "Type ${lib.getExe vm} to run the system vm"
           '';
@@ -75,10 +79,10 @@
         };
 
         modules =
-          [mainModule]
+          [ mainModule ]
           ++ (
-            if !config.modules.homeManager.enable
-            then []
+            if !config.modules.homeManager.enable then
+              [ ]
             else
               (with inputs; [
                 home-manager.nixosModules.home-manager

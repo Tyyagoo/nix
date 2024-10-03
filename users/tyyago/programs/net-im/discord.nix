@@ -2,9 +2,10 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   home = {
-    packages = [pkgs.discord];
+    packages = [ pkgs.discord ];
 
     # may be broken in mainstream, but installing it anyways.
     file = {

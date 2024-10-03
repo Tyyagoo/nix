@@ -2,7 +2,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   programs = {
     dconf.enable = true;
     hyprland.enable = true; # enable system level hyprland settings.
@@ -13,7 +14,7 @@
 
     # openssh = {
     #   enable = true;
- 
+
     #   settings = {
     #     PasswordAuthentication = true;
     #     PermitRootLogin = "yes";
@@ -39,8 +40,7 @@
         enable = true;
 
         luaModules = lib.attrValues {
-          inherit
-            (pkgs.luaPackages)
+          inherit (pkgs.luaPackages)
             lgi
             ldbus
             luadbi-mysql

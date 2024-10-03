@@ -1,16 +1,21 @@
 {
   wallpaper = ./wallpapers/min_forest.png;
 
-  neovim = pkgs: (let
-    decay-nvim = pkgs.vimUtils.buildVimPlugin {
-      name = "decay.nvim";
-      src = pkgs.decay-nvim-src;
-    };
-  in {
-    extraPlugins = [decay-nvim];
-    colorscheme = "decay-dark";
-    opts.background = "dark";
-  });
+  neovim =
+    pkgs:
+    (
+      let
+        decay-nvim = pkgs.vimUtils.buildVimPlugin {
+          name = "decay.nvim";
+          src = pkgs.decay-nvim-src;
+        };
+      in
+      {
+        extraPlugins = [ decay-nvim ];
+        colorscheme = "decay-dark";
+        opts.background = "dark";
+      }
+    );
 
   palette = {
     scheme = "dark";

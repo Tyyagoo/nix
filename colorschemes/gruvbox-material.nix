@@ -2,7 +2,7 @@
   wallpaper = ./wallpapers/gruvbox-material.png;
 
   neovim = pkgs: {
-    extraPlugins = with pkgs; [vimPlugins.gruvbox-material];
+    extraPlugins = with pkgs; [ vimPlugins.gruvbox-material ];
     colorscheme = "gruvbox-material";
 
     globals = {
@@ -42,4 +42,3 @@
     };
   };
 }
-

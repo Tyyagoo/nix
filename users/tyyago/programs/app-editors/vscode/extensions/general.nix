@@ -1,7 +1,8 @@
 {
   inputs,
   pkgs,
-}: let
+}:
+let
   normal = with pkgs.vscode-extensions; [
     bbenoist.nix
     sumneko.lua
@@ -20,6 +21,4 @@
     rust-lang.rust-analyzer
   ];
 in
-  []
-  ++ normal
-  ++ community
+[ ] ++ normal ++ community

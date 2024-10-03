@@ -2,31 +2,33 @@
   flakeConfig,
   lib,
   ...
-}: let
+}:
+let
   aetherShellCfg = flakeConfig.modules.homeManager.aetherShell;
 
-  convertConfigThemeToAetherTheme = theme: (with theme; {
-    inherit
-      (primary)
-      background
-      foreground
-      ;
+  convertConfigThemeToAetherTheme =
+    theme:
+    (with theme; {
+      inherit (primary)
+        background
+        foreground
+        ;
 
-    hovered_black = bright.black;
+      hovered_black = bright.black;
 
-    inherit
-      (normal)
-      black
-      red
-      green
-      yellow
-      blue
-      cyan
-      magenta
-      white
-      ;
-  });
-in {
+      inherit (normal)
+        black
+        red
+        green
+        yellow
+        blue
+        cyan
+        magenta
+        white
+        ;
+    });
+in
+{
   programs.aetherShell = {
     enable = true;
 
@@ -41,18 +43,19 @@ in {
         };
       };
 
-      theme = let
-        colors = flakeConfig.colorscheme;
-        computedColors = aetherShellCfg.colors colors;
-      in {
-        colors = convertConfigThemeToAetherTheme computedColors;
+      theme =
+        let
+          colors = flakeConfig.colorscheme;
+          computedColors = aetherShellCfg.colors colors;
+        in
+        {
+          colors = convertConfigThemeToAetherTheme computedColors;
 
-        inherit
-          (computedColors)
-          scheme
-          accents
-          ;
-      };
+          inherit (computedColors)
+            scheme
+            accents
+            ;
+        };
     };
   };
 }

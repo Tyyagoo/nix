@@ -1,6 +1,7 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   hardware.graphics = {
     enable = true;
-    extraPackages = [pkgs.mesa.drivers];
+    extraPackages = [ pkgs.mesa.drivers ];
   };
 }

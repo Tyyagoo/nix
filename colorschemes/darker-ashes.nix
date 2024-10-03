@@ -2,7 +2,7 @@
   wallpaper = ./wallpapers/cozy.png;
 
   # no neovim config ;-;
-  neovim = _: {};
+  neovim = _: { };
 
   palette = rec {
     scheme = "dark";
@@ -34,4 +34,3 @@
     };
   };
 }
-

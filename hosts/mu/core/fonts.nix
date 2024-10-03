@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   fonts = {
     enableDefaultPackages = false;
 
@@ -7,10 +8,19 @@
       antialias = true;
 
       defaultFonts = {
-        emoji = ["Noto Color Emoji"];
-        monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
-        serif = ["Noto Serif" "Noto Color Emoji"];
-        sansSerif = ["Inter" "Noto Color Emoji"];
+        emoji = [ "Noto Color Emoji" ];
+        monospace = [
+          "JetBrainsMono Nerd Font"
+          "Noto Color Emoji"
+        ];
+        serif = [
+          "Noto Serif"
+          "Noto Color Emoji"
+        ];
+        sansSerif = [
+          "Inter"
+          "Noto Color Emoji"
+        ];
       };
 
       hinting = {

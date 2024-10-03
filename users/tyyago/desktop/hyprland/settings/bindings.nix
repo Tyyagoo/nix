@@ -2,30 +2,37 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   wayland.windowManager.hyprland.settings = {
-    bind = let
-      utils = import ./utils.nix {inherit pkgs lib;};
-      num-workspaces = 7;
+    bind =
+      let
+        utils = import ./utils.nix { inherit pkgs lib; };
+        num-workspaces = 7;
 
-      workspaces = let
-        generator = x: let
-          ws = let
-            c = (x + 1) / num-workspaces;
+        workspaces =
+          let
+            generator =
+              x:
+              let
+                ws =
+                  let
+                    c = (x + 1) / num-workspaces;
+                  in
+                  builtins.toString (x + 1 - (c * num-workspaces));
+              in
+              [
+                "SUPER, ${ws}, workspace, ${toString (x + 1)}"
+                "SUPER SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+              ];
           in
-            builtins.toString (x + 1 - (c * num-workspaces));
-        in [
-          "SUPER, ${ws}, workspace, ${toString (x + 1)}"
-          "SUPER SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-        ];
-      in
-        builtins.concatLists (builtins.genList generator num-workspaces);
+          builtins.concatLists (builtins.genList generator num-workspaces);
 
-      reloadAgs = utils.silentScript "reload-ags" ''
-        pgrep -x .ags-wrapped > /dev/null 2>&1 && kill -9 $(pgrep -x .ags-wrapped)
-        ags & disown
-      '';
-    in
+        reloadAgs = utils.silentScript "reload-ags" ''
+          pgrep -x .ags-wrapped > /dev/null 2>&1 && kill -9 $(pgrep -x .ags-wrapped)
+          ags & disown
+        '';
+      in
       workspaces
       ++ [
         "SUPERSHIFT, Q, exit"

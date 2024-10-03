@@ -2,13 +2,14 @@
   flakeConfig,
   pkgs,
   ...
-}: {
+}:
+{
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
 
       serviceConfig = {
         Type = "simple";
@@ -20,7 +21,7 @@
     };
   };
 
-  environment.systemPackages = [pkgs.qemu];
+  environment.systemPackages = [ pkgs.qemu ];
   security.polkit.enable = true;
   programs.virt-manager.enable = true;
 
@@ -33,9 +34,10 @@
   virtualisation = {
     libvirtd.enable = true;
 
-    vmVariant.virtualisation = let
-      inherit (flakeConfig.modules.vm) settings;
-    in
+    vmVariant.virtualisation =
+      let
+        inherit (flakeConfig.modules.vm) settings;
+      in
       settings;
 
     docker = {

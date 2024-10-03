@@ -1,16 +1,21 @@
 {
   wallpaper = ./wallpapers/fantasy-woods.png;
 
-  neovim = pkgs: (let
-    decay-nvim = pkgs.vimUtils.buildVimPlugin {
-      name = "decay.nvim";
-      src = pkgs.decay-nvim-src;
-    };
-  in {
-    extraPlugins = [decay-nvim];
-    colorscheme = "decay";
-    opts.background = "light";
-  });
+  neovim =
+    pkgs:
+    (
+      let
+        decay-nvim = pkgs.vimUtils.buildVimPlugin {
+          name = "decay.nvim";
+          src = pkgs.decay-nvim-src;
+        };
+      in
+      {
+        extraPlugins = [ decay-nvim ];
+        colorscheme = "decay";
+        opts.background = "light";
+      }
+    );
 
   palette = rec {
     scheme = "light";
@@ -48,4 +53,3 @@
     };
   };
 }
-

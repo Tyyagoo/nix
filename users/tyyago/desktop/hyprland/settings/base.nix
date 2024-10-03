@@ -2,7 +2,8 @@
   flakeConfig,
   lib,
   ...
-}: {
+}:
+{
   wayland.windowManager.hyprland.settings = {
     dwindle = {
       pseudotile = true;
@@ -23,19 +24,21 @@
       "opacity 1.0 override 0.9 override 1.0 override,title:^(.*)$"
     ];
 
-    general = let
-      gaps = 7;
-      removeHash = colour: lib.replaceStrings ["#"] [""] colour;
-    in {
-      gaps_in = gaps;
-      gaps_out = gaps * 2;
-      border_size = 1;
-      allow_tearing = true;
-      resize_on_border = false;
+    general =
+      let
+        gaps = 7;
+        removeHash = colour: lib.replaceStrings [ "#" ] [ "" ] colour;
+      in
+      {
+        gaps_in = gaps;
+        gaps_out = gaps * 2;
+        border_size = 1;
+        allow_tearing = true;
+        resize_on_border = false;
 
-      "col.active_border" = "rgb(${removeHash flakeConfig.colorscheme.bright.black})";
-      "col.inactive_border" = "rgb(${removeHash flakeConfig.colorscheme.normal.black})";
-    };
+        "col.active_border" = "rgb(${removeHash flakeConfig.colorscheme.bright.black})";
+        "col.inactive_border" = "rgb(${removeHash flakeConfig.colorscheme.normal.black})";
+      };
 
     decoration = {
       rounding = 7;
@@ -46,7 +49,7 @@
         brightness = 1.0;
         contrast = 1.0;
         new_optimizations = true;
-        noise = 0.02;
+        noise = 2.0e-2;
         passes = 2;
         size = 5;
         xray = false;

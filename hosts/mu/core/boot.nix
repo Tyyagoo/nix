@@ -1,7 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   boot = {
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
-    
+
     loader = {
       systemd-boot.enable = false;
 

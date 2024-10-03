@@ -32,11 +32,9 @@
       white = "#d8d8d8";
     };
 
-    bright =
-      normal
-      // {
-        black = "#585858";
-        white = "#f8f8f8";
-      };
+    bright = normal // {
+      black = "#585858";
+      white = "#f8f8f8";
+    };
   };
 }

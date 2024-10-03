@@ -4,15 +4,14 @@
   flakeConfig,
   ...
 }:
-with flakeConfig.user; {
+with flakeConfig.user;
+{
   users.users."${name}" = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = [ "wheel" ];
 
     inherit initialPassword;
 
-    packages = lib.mkIf packages.enable (
-      packages.generator pkgs
-    );
+    packages = lib.mkIf packages.enable (packages.generator pkgs);
   };
 }

@@ -1,13 +1,14 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     (import ./disko.nix {
       hdd = "/dev/sda";
       ssd = "/dev/nvme0n1";
     })
   ];
-  
+
   disko.enableConfig = true;
-  
+
   boot = {
     supportedFilesystems = [ "btrfs" ];
     loader.grub.enableCryptodisk = true;

@@ -2,7 +2,7 @@
   wallpaper = ./wallpapers/city.png;
 
   # no neovim config ;-;
-  neovim = _: {};
+  neovim = _: { };
 
   palette = rec {
     scheme = "dark";
@@ -28,11 +28,9 @@
       white = "#F8F9FA";
     };
 
-    bright =
-      normal
-      // {
-        black = "#4b4f53";
-        white = "#F8F9FA";
-      };
+    bright = normal // {
+      black = "#4b4f53";
+      white = "#F8F9FA";
+    };
   };
 }

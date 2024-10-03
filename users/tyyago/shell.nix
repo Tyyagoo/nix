@@ -3,21 +3,25 @@
   lib,
   flakeConfig,
   ...
-}: let
-  shellAliases = let
-    eza = lib.getExe pkgs.eza;
-    bat = lib.getExe pkgs.bat;
-  in {
-    ls = "${eza} --icons";
-    la = "ls -la";
-    tree = "ls --tree";
-    cat = "${bat} --paging=never --style=plain --theme=base16";
-    cd = "z";
-    code = "code --disable-gpu";
-    neofetch = "${pkgs.fastfetch}/bin/flashfetch";
-    tmux = "tmux -2";
-  };
-in {
+}:
+let
+  shellAliases =
+    let
+      eza = lib.getExe pkgs.eza;
+      bat = lib.getExe pkgs.bat;
+    in
+    {
+      ls = "${eza} --icons";
+      la = "ls -la";
+      tree = "ls --tree";
+      cat = "${bat} --paging=never --style=plain --theme=base16";
+      cd = "z";
+      code = "code --disable-gpu";
+      neofetch = "${pkgs.fastfetch}/bin/flashfetch";
+      tmux = "tmux -2";
+    };
+in
+{
   programs = {
     command-not-found = {
       enable = true;
@@ -32,12 +36,14 @@ in {
       autocd = true;
       syntaxHighlighting.enable = true;
 
-      autosuggestion = let
-        inherit (flakeConfig) colorscheme;
-      in {
-        enable = true;
-        highlight = "fg=${colorscheme.bright.black}";
-      };
+      autosuggestion =
+        let
+          inherit (flakeConfig) colorscheme;
+        in
+        {
+          enable = true;
+          highlight = "fg=${colorscheme.bright.black}";
+        };
     };
 
     bash = {
@@ -65,14 +71,16 @@ in {
         add_newline = false;
         format = "$directory$git_branch$git_status$nix_shell$character";
 
-        directory = let
-          inherit (flakeConfig.colorscheme) accents;
-        in {
-          style = accents.secondary;
-          read_only = "";
-          read_only_style = "yellow";
-          home_symbol = flakeConfig.user.name;
-        };
+        directory =
+          let
+            inherit (flakeConfig.colorscheme) accents;
+          in
+          {
+            style = accents.secondary;
+            read_only = "";
+            read_only_style = "yellow";
+            home_symbol = flakeConfig.user.name;
+          };
 
         nix_shell = {
           symbol = "";
@@ -84,14 +92,14 @@ in {
           format = "on [$symbol$branch]($style) ";
         };
 
-        character = let
-          value = "[|](black)";
-        in
-          {disabled = false;}
-          // lib.fold (
-            key: acc:
-              acc // {"${key}" = "${value}";}
-          ) {} [
+        character =
+          let
+            value = "[|](black)";
+          in
+          {
+            disabled = false;
+          }
+          // lib.fold (key: acc: acc // { "${key}" = "${value}"; }) { } [
             "success_symbol"
             "error_symbol"
             "vimcmd_symbol"

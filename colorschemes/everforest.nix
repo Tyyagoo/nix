@@ -2,7 +2,7 @@
   wallpaper = ./wallpapers/everforest.png;
 
   neovim = pkgs: {
-    extraPlugins = [pkgs.vimPlugins.everforest];
+    extraPlugins = [ pkgs.vimPlugins.everforest ];
 
     colorscheme = "everforest";
 
@@ -43,4 +43,3 @@
     };
   };
 }
-

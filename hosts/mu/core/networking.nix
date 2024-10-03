@@ -1,7 +1,9 @@
 { flakeConfig, ... }:
 
 {
-  time = { inherit (flakeConfig) timeZone; };
+  time = {
+    inherit (flakeConfig) timeZone;
+  };
 
   networking = {
     hostName = flakeConfig.hostname;

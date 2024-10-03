@@ -2,7 +2,7 @@
   wallpaper = ./wallpapers/waves.png;
 
   # no config yet
-  neovim = _: {};
+  neovim = _: { };
 
   palette = rec {
     scheme = "dark";
@@ -28,11 +28,9 @@
       white = "#e4e6e7";
     };
 
-    bright =
-      normal
-      // {
-        black = "#2c2e2f";
-        white = "#f2f4f5";
-      };
+    bright = normal // {
+      black = "#2c2e2f";
+      white = "#f2f4f5";
+    };
   };
 }

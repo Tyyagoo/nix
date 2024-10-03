@@ -2,7 +2,7 @@
   wallpaper = ./wallpapers/kanagawa.png;
 
   neovim = pkgs: {
-    extraPlugins = [pkgs.vimPlugins.kanagawa-nvim];
+    extraPlugins = [ pkgs.vimPlugins.kanagawa-nvim ];
     colorscheme = "kanagawa-dragon";
   };
 
@@ -36,4 +36,3 @@
     };
   };
 }
-

@@ -1,4 +1,10 @@
-{ pkgs, lib, flakeConfig, ... }: let
+{
+  pkgs,
+  lib,
+  flakeConfig,
+  ...
+}:
+let
   config = {
     enable = true;
     enableMan = false;
@@ -27,7 +33,7 @@
 
     autoCmd = [
       {
-        event = ["VimLeave"];
+        event = [ "VimLeave" ];
         command = "set guicursor=n:ver10";
       }
     ];
@@ -36,7 +42,7 @@
       {
         key = "jk";
         action = "<esc>";
-        mode = ["i"];
+        mode = [ "i" ];
         options.silent = true;
       }
 
@@ -53,7 +59,7 @@
       }
 
       {
-        mode = ["n"];
+        mode = [ "n" ];
         key = ";";
         action = ":";
         options.silent = true;
@@ -92,9 +98,19 @@
         nixvimInjections = true;
 
         ensureInstalled = [
-          "javascript" "typescript" "tsx"
-          "c" "cpp" "rust" "zig" "lua"
-          "html" "css" "bash" "python" "nix"
+          "javascript"
+          "typescript"
+          "tsx"
+          "c"
+          "cpp"
+          "rust"
+          "zig"
+          "lua"
+          "html"
+          "css"
+          "bash"
+          "python"
+          "nix"
         ];
       };
 
@@ -102,7 +118,7 @@
         enable = true;
 
         settings = {
-          columns = ["icon"];
+          columns = [ "icon" ];
 
           keymaps = {
             "<C-h>" = false;
@@ -139,13 +155,15 @@
         autoEnableSources = true;
 
         settings = {
-          sources = let
-            mk = name: { inherit name; };
-          in [
-            (mk "nvim_lsp")
-            (mk "path")
-            (mk "buffer")
-          ];
+          sources =
+            let
+              mk = name: { inherit name; };
+            in
+            [
+              (mk "nvim_lsp")
+              (mk "path")
+              (mk "buffer")
+            ];
 
           mapping = {
             "<C-Space>" = "cmp.mapping.complete()";
@@ -160,7 +178,8 @@
       };
     };
   };
-in {
+in
+{
   home.packages = with pkgs; [
     wl-clipboard-rs
     xclip
