@@ -7,11 +7,11 @@
 }:
 with lib.${namespace};
 let
-  cfg = config.${namespace}.apps.brave;
+  cfg = config.${namespace}.programs.brave;
   inherit (lib) mkIf;
 in
 {
-  options.${namespace}.apps.brave = {
+  options.${namespace}.programs.brave = {
     enable = mkEnableOpt;
   };
 

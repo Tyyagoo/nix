@@ -7,18 +7,18 @@
 }:
 with lib.${namespace};
 let
-  cfg = config.${namespace}.tools.nix-ld;
+  cfg = config.${namespace}.programs.direnv;
   inherit (lib) mkIf;
 in
 {
-  options.${namespace}.tools.nix-ld = {
+  options.${namespace}.programs.direnv = {
     enable = mkEnableOpt;
   };
 
   config = mkIf cfg.enable {
-    programs = {
-      nix-ld.enable = true;
-      # nix-ld.dev.enable = false;
+    home.programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
     };
   };
 }

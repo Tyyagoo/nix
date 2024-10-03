@@ -7,13 +7,13 @@
 }:
 with lib.${namespace};
 let
-  cfg = config.${namespace}.tools.git;
-  hasGpg = config.${namespace}.tools.gpg.enable;
+  cfg = config.${namespace}.programs.git;
+  hasGpg = config.${namespace}.programs.gpg.enable;
   user = config.user;
   inherit (lib) mkIf types;
 in
 {
-  options.${namespace}.tools.git = {
+  options.${namespace}.programs.git = {
     enable = mkEnableOpt;
     userName = mkOpt' types.str user.displayName;
     userEmail = mkOpt' types.str user.email;

@@ -7,11 +7,11 @@
 }:
 with lib.${namespace};
 let
-  cfg = config.${namespace}.apps.bitwarden;
+  cfg = config.${namespace}.programs.bitwarden;
   inherit (lib) mkIf;
 in
 {
-  options.${namespace}.apps.bitwarden = {
+  options.${namespace}.programs.bitwarden = {
     enable = mkEnableOpt;
   };
 

@@ -47,7 +47,7 @@ in
             trusted-users = users ++ cfg.extraUsers;
             allowed-users = users;
           }
-          // (lib.optionalAttrs config.${namespace}.tools.direnv.enable {
+          // (lib.optionalAttrs config.${namespace}.programs.direnv.enable {
             keep-outputs = true;
             keep-derivations = true;
           });

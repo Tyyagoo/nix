@@ -12,7 +12,6 @@
       };
 
       overlays = with inputs; [
-        hyprpanel.overlay
         snowfall-flake.overlays."package/flake"
       ];
 
@@ -43,9 +42,5 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
-
-    hyprpanel.url = "github:jas-singhfsu/hyprpanel";
-
-    stylix.url = "github:danth/stylix";
   };
 }

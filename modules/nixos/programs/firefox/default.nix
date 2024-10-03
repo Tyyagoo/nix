@@ -7,12 +7,12 @@
 }:
 with lib.${namespace};
 let
-  cfg = config.${namespace}.apps.firefox;
+  cfg = config.${namespace}.programs.firefox;
   name = config.user.name;
   inherit (lib) mkIf;
 in
 {
-  options.${namespace}.apps.firefox = {
+  options.${namespace}.programs.firefox = {
     enable = mkEnableOpt;
   };
 

@@ -7,7 +7,7 @@
 }:
 with lib.${namespace};
 let
-  cfg = config.${namespace}.tools.gpg;
+  cfg = config.${namespace}.programs.gpg;
   hasGtk = config.${namespace}.desktop.gtk.enable;
   user = config.user;
   fixGpg = ''
@@ -16,7 +16,7 @@ let
   inherit (lib) mkIf;
 in
 {
-  options.${namespace}.tools.gpg = {
+  options.${namespace}.programs.gpg = {
     enable = mkEnableOpt;
   };
 

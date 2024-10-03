@@ -24,7 +24,6 @@ in
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     environment.systemPackages = with pkgs; [
-      hyprpanel
       wl-clipboard
       hyprpicker
       wf-recorder
@@ -53,8 +52,8 @@ in
 
         exec-once = [
           "swww init"
+          "waybar"
           # "hyprctl setcursor Qogir 24"
-          "hyprpanel"
         ];
 
         monitor = [ ",preferred,auto,1" ];

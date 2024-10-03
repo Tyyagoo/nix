@@ -17,19 +17,22 @@ in
 
   config = mkIf cfg.enable {
     "${namespace}" = {
-      apps = {
-        alacritty.enable = true;
+      programs = {
         bitwarden.enable = true;
         brave.enable = true;
+        btop.enable = true;
+        cava.enable = true;
         discord.enable = true;
+        dunst.enable = true;
         firefox.enable = true;
+        imv.enable = true;
       };
 
       desktop = {
         hyprland.enable = true;
         gtk.enable = true;
         qt.enable = true;
-        theme.enable = true;
+        waybar.enable = true;
       };
 
       system = {

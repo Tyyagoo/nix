@@ -7,11 +7,11 @@
 }:
 with lib.${namespace};
 let
-  cfg = config.${namespace}.apps.discord;
+  cfg = config.${namespace}.programs.discord;
   inherit (lib) mkIf;
 in
 {
-  options.${namespace}.apps.discord = {
+  options.${namespace}.programs.discord = {
     enable = mkEnableOpt;
   };
 
