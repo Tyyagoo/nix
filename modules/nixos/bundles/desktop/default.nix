@@ -5,17 +5,23 @@
   namespace,
   ...
 }:
-with lib.${namespace};
-let
+with lib.${namespace}; let
   cfg = config.${namespace}.bundles.desktop;
   inherit (lib) mkIf;
-in
-{
+in {
   options.${namespace}.bundles.desktop = {
     enable = mkEnableOpt;
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = [pkgs.vscodium];
+
+    services.xserver = {
+      enable = true;
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+    };
+
     "${namespace}" = {
       programs = {
         bitwarden.enable = true;
@@ -29,10 +35,10 @@ in
       };
 
       desktop = {
-        hyprland.enable = true;
+        hyprland.enable = false;
         gtk.enable = true;
         qt.enable = true;
-        waybar.enable = true;
+        waybar.enable = false;
       };
 
       system = {

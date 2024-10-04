@@ -29,6 +29,8 @@ in
       pinentryPackage = if hasGtk then pkgs.pinentry-gnome3 else pkgs.pinentry-tty;
     };
 
+    environment.systemPackages = [ config.home.services.gpg-agent.pinentryPackage ];
+
     # TODO: research
     # home.packages = lib.optional config.gtk.enable pkgs.gcr;
 
